@@ -1,0 +1,36 @@
+.footer{
+    background-color: $gray;
+    padding-top: 30px;
+    margin-top: 40px;
+    margin-bottom: -15px;
+    &__title{
+        margin-top: 15px;
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+    &__text{
+        color: $dark-gray;
+        font-size: 14px;
+        font-weight: 500;
+    }
+    a{
+        color: #fff;
+        background-color: $black;
+        border-radius: 40px;
+        padding: 10px 20px;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 14px;
+        margin-bottom: 10px ;
+    }
+    a:hover{
+        color: #fff;
+    }
+    &__copyright{
+        color: $dark-gray;
+        font-size: 14px;
+        font-weight: 500;
+        margin: 15px 0px;
+    }
+}

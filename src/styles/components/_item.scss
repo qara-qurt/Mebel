@@ -1,0 +1,126 @@
+.item {
+
+    h4{
+        font-size: 20px;
+        font-weight: 600;
+    }
+    
+    &__body {
+    }
+    
+    // .item__imges
+    
+    &__imges {
+        .img{
+            width: 100%;
+            margin: 5px;
+        }
+    }
+    
+    // .item__info
+    
+    &__info {
+    }
+    
+    // .item__title
+    
+    &__title {
+        display: flex;
+        h4{
+            font-size: 22px;
+            font-weight: 700;
+        }
+    }
+    
+    // .item__more-info
+    
+    &__more-info {
+        margin-top: -10px;
+        color: $dark-gray;
+    }
+    
+    // .item__colors
+    
+    &__colors {
+        margin-top: 30px;
+        h4{
+            font-weight: 600;
+        }
+    
+    }
+    
+    // .item__buttons
+    
+    &__buttons {
+        margin-top: 30px;
+        display: flex;
+        .img-like{
+            margin-left: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid $gray;
+            padding: 10px 12px 8px 12px;
+            border-radius: 50px;
+            img{
+                width: 30px;
+            }
+        }
+        .button:active{
+            margin-top:1px ;
+            margin-bottom: -1px;
+        }
+    }
+    
+    // .item__size
+    
+    &__size {
+        margin-top: 30px;
+    }
+    
+    // .item__matelials
+    
+    &__matelials {
+        margin-top: 30px;
+    }
+    ul{
+        list-style: none;
+        padding: 0;
+        color: $dark-gray;
+        font-weight: 400;
+    }
+    span{
+        text-decoration: underline;
+        color: #007eff;
+        display: none;
+    }
+    .unshow{
+        display: none;
+    }
+    }
+@media (max-width:1024px) {
+    .item span{
+        display: inline-block;
+    }
+    .full{
+        display: none;
+    }
+}
+
+@media (max-width:995px) {
+    .item__buttons{
+        .button{
+            font-size: 16px;
+            padding: 15px 30px;
+        }
+    }
+}
+
+@media (max-width:768px){
+    .item{
+        h4{
+            font-size: 20px;
+        }
+    }
+}
+    

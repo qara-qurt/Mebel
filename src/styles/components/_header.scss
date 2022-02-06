@@ -1,0 +1,248 @@
+@import '../varibales';
+
+.navbar{
+    height: 100px;
+}
+
+.nav-link{
+    color: $black;
+    font-weight: 600;
+    margin: 0px 10px;
+}
+.header{
+    &__icon{
+        cursor: pointer;
+        width: 50px;
+    }
+    &__search{
+        margin-left: 10px;
+        width: 670px;
+        background-color: $gray;
+        border-radius: 20px;
+        height: 40px;
+        input{
+            background-color: inherit;
+            border: none;
+        }
+        img{
+            cursor: pointer;
+            width: 18px;
+            height: 18px;
+        }
+    }
+
+}
+
+.bg{
+    background-image: url('../../assets/img/Bg2.jpg');
+    background-size: auto;
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+
+.menu-position{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.icon{
+    cursor: pointer;
+    margin: 0px 15px;
+    width: 24px;
+    height: 24px;
+}
+
+.dropdown-item:active{
+    background-color: $orange !important;
+}
+.sub-menu{
+    color: $black !important;
+    text-decoration: none !important;
+}
+.menu-adapt{
+    display: flex;
+    justify-content: right;
+}
+
+.icons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.icons{
+    a{
+        position: relative;
+    }
+}
+
+.burger{
+    padding-right: 10px;
+    display: none;
+}
+.menu-adapt{
+    width: 100%;
+    padding-right: 10px;
+}
+
+.cart-count{
+    position: absolute;
+    top:15px;
+    right: 8px;
+    text-decoration: none;
+    background-color: $orange;
+    border: none;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #fff;
+    padding: 0px 6px;
+}
+/* скрываем чекбокс */
+#menu__toggle {
+    opacity: 0;
+  }
+  .menu__btn { 
+    margin-top: 30px;
+    position: relative;
+    margin-left: 20px;
+    width: 26px;
+    height: 26px;
+    cursor: pointer;
+    z-index: 5;
+  }
+  /* добавляем "гамбургер" */
+  .menu__btn > span,
+  .menu__btn > span::before,
+  .menu__btn > span::after {
+    display: block;
+    position: absolute;
+    width: 26px;
+    height: 2px;
+    background-color: #616161;
+  }
+  .menu__btn > span::before {
+    content: '';
+    top: -8px;
+  }
+  .menu__btn > span::after {
+    content: '';
+    top: 8px;
+  }
+
+  #menu__toggle:checked ~ .menu__btn > span {
+    transform: rotate(45deg);
+  }
+  #menu__toggle:checked ~ .menu__btn > span::before {
+    top: 0;
+    transform: rotate(0);
+  }
+  #menu__toggle:checked ~ .menu__btn > span::after {
+    top: 0;
+    transform: rotate(90deg);
+  }
+  #menu__toggle:checked ~ .menu__box {
+    visibility: visible;
+    left: 0;
+  }
+
+.burger-menu{
+    position: fixed;
+    right: 0;
+    top:-200px;
+    padding: 100px 0px;
+    width: 50%;
+    height: 100vh;
+    transform: translateX(150%);
+    margin-top: 200px;
+    background-color: white;
+    font-size: 18px;
+    flex-direction: column!important;
+    transition: all 0.5s;
+}
+
+.showed{
+    position: fixed;
+    transform: translateX(0)!important;
+}
+
+@media (max-width:1440px){
+    .menu-position{
+        justify-content: space-around;
+    }
+    .header__search{
+        width: 500px;
+    }
+}
+
+
+@media (max-width:1300px){
+    .header__search{
+        width: 280px;
+    }
+}
+
+@media (max-width:1024px){
+    .burger{
+        display: block;
+    }
+    .menu {
+        display: none!important;
+    }
+    .header__search{
+        width: 500px;
+    }
+}
+@media (max-width:880px){
+    .navbar{
+        height: 200px;   
+    }
+    .header{
+        flex-direction: column;
+    }
+    .header__search{
+        width: 680px;
+    }
+    .menu-adapt{
+        justify-content: space-between;
+    }
+}
+
+@media (max-width:780px){
+    .header__search{
+        width: 500px;
+    }
+}
+
+@media (max-width:575px){
+    .header__search{
+        width: 535px;
+    }
+}
+
+@media (max-width:546px){
+    .header__search{
+        width: 400px;
+    }
+}
+
+@media (max-width:525px){
+    .header__search{
+        width: 280px;
+    }
+    .menu-adapt{
+        padding: 0px 50px;
+    }
+}
+
+
+@media (max-width:425px){
+    .burger-menu{
+        width: 100%;
+    }
+}
+@media (max-width:349px){
+    .burger{
+        margin-top: -20px;
+    }
+}

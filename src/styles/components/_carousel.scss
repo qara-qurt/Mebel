@@ -1,0 +1,17 @@
+.swiper-container{
+    height: 370px !important;
+}
+
+.swiper-slide{
+    display:  flex!important;
+    justify-content: center!important;
+}
+.swiper-button-next, .swiper-button-prev {
+    color:  $orange !important;
+}
+
+.swiper-button-next:after, .swiper-button-prev:after {
+    content: '';
+    font-size: 10px;
+    font-weight: bolder;
+}

@@ -1,0 +1,124 @@
+.cart-basket {
+
+    display: flex;
+    justify-content: space-between;
+    max-width: 900px;
+    border-top: 1px solid $gray;
+    padding: 20px 0px;
+    
+    &__main-side{
+        display: flex;
+    }
+    &__body {
+    }
+    &__title{
+        margin-top: 10px;
+    }
+    
+    // .cart-basket__button
+    
+    &__button {
+        margin-right: 20px;
+        display: flex;
+        background-color: $orange;
+        border-radius: 30px;
+        padding: 10px;
+        width: 92px;
+        div{
+            cursor: pointer;
+            color: white;
+            font-size: 20px;
+            font-weight: 600;
+            padding: 0px 7px;
+        }
+    }
+    .delete{
+        color: #EF2E2E;
+        font-weight: 700;
+        background: none;
+        border: none;
+    }
+    .counter{
+        margin-top: 50px;
+        display: flex;
+    }
+    // .cart-basket__price
+    
+    &__price {
+        font-weight: 600;
+        font-size: 20px;
+    }
+    img{
+        width: 200px;
+        height: 200px;
+    }
+    h4{
+        font-weight: 600;
+    }
+    p{
+        font-size: 16px;
+        color: $dark-gray;
+    }
+
+    }
+
+.all-price{
+    &__title{
+        padding-bottom: 20px;
+        border-bottom: 2px solid $dark-gray;
+    }
+    &__price{
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-between;
+        h5{font-weight: 700;}
+    }
+    &__button{
+        margin-top: 20px;
+        text-align: center;
+        padding: 30px 80px;
+        background-color: $orange;
+        font-size: 20px;
+        color: white;
+        font-weight: 700;
+    }
+}
+
+@media (max-width:768px){
+    .cart-basket{
+        h4{
+            font-size: 20px;
+        }
+        p{
+            font-size: 14px;
+        }
+    }
+    .cart-basket__price{
+        font-size: 20px;
+    }
+    .all-price{
+        margin-top: 50px;
+    }
+}
+
+@media (max-width:475px){
+    .cart-basket__price{
+        display: none;
+    }
+    .cart-basket img{
+        width: 150px;
+        height: 150px;
+    }
+    .counter{
+        margin-top: 0px!important;
+    }
+    .delete{
+        font-size: 14px;
+    }
+    .cart-basket__button{
+        div{
+            font-size: 14px;
+        }
+        width: 80px;
+    }
+}
