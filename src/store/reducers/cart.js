@@ -1,10 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-const initialState = {
+
+
+const initialState = localStorage.getItem("cart") == null ? {
     cart:[],
     count:0,
     allPrice:0
-}
+}:JSON.parse(localStorage.getItem('cart'))
 
 const deleteItem = (state,id) => {
     return state.cart = state.cart.filter((item)=>{
@@ -19,6 +21,11 @@ const getItemCount = (state,id) => {
         }
     }
 }
+
+const addToLocalStorage = (state) => {
+    localStorage.setItem("cart",JSON.stringify(state))
+}
+
 
 export const counterSlice = createSlice({
   name: 'cart',
@@ -57,12 +64,14 @@ export const counterSlice = createSlice({
                 state.count++
             }
         }
+        addToLocalStorage(state)
     },
     deleteCart:(state,action) => {
         let CountAndPrice = getItemCount(state,action.payload)
         state.count = state.count - CountAndPrice.count
         state.allPrice = state.allPrice - (CountAndPrice.price * CountAndPrice.count)
         deleteItem(state,action.payload)
+        addToLocalStorage(state)
     },
     plusCart:(state,action) => {
         state.cart.map(val=>{
@@ -72,6 +81,7 @@ export const counterSlice = createSlice({
                 state.allPrice+=action.payload.price
             }
         })
+        addToLocalStorage(state)
     },
     minusCart:(state,action) => {
         if(state.count==1){
@@ -90,7 +100,9 @@ export const counterSlice = createSlice({
                 }
             }
         })
+        addToLocalStorage(state)
     },
+    
   },
 })
 

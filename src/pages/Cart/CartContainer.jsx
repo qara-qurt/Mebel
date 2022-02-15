@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Container } from 'react-bootstrap'
 import { useSelector,useDispatch } from 'react-redux';
 import { EmptyCard } from '../../components/EmptyCard';
+import Layout from '../../layout/Layout';
 import { deleteCart, plusCart, minusCart } from '../../store/reducers/cart';
 import Cart from './Cart';
 
@@ -21,16 +22,18 @@ const CartContainer = ({}) => {
         dispatch(minusCart(id))
     }
     return (
-        <div className='cart'>
-            <Container>
-                {cart.length>0
-                ?
-                <Cart cart = {cart} onDeleCartItem={onDeleCartItem} onPlusCart={onPlusCart} onMinusCart={onMinusCart} allPrice={allPrice}/>
-                :
-                <EmptyCard />
-                }
-            </Container>
-        </div>
+        <Layout>
+            <div className='cart'>
+                <Container>
+                    {cart.length>0
+                    ?
+                    <Cart cart = {cart} onDeleCartItem={onDeleCartItem} onPlusCart={onPlusCart} onMinusCart={onMinusCart} allPrice={allPrice}/>
+                    :
+                    <EmptyCard />
+                    }
+                </Container>
+            </div>
+        </Layout>
     )
 }
 

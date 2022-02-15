@@ -14,6 +14,9 @@ export const BurgerMenu = () => {
             document.body.style.overflow = ""
         }
     }
+    const onSetVisible = () => {
+        setIsVisible(!isVisible)
+    }
     return (
         <>
             <div className='burger'>
@@ -24,22 +27,30 @@ export const BurgerMenu = () => {
             </div>
             <Nav className={classnames('burger-menu',{'showed':isVisible})}>
                 <NavDropdown title='Товары'>
-                   <NavDropdown.Item><Link to='/offers' className='sub-menu' >Все</Link></NavDropdown.Item> 
-                   <NavDropdown.Item><Link to='/cupboards' className='sub-menu'>Шкафы</Link></NavDropdown.Item> 
-                   <NavDropdown.Item><Link to='/beds' className='sub-menu'>Кровати</Link></NavDropdown.Item> 
-                   <NavDropdown.Item><Link to='/offers' className='sub-menu'>Стулья</Link></NavDropdown.Item> 
-                   <NavDropdown.Item><Link to='/offers' className='sub-menu'>Кухня</Link></NavDropdown.Item> 
+                   <NavDropdown.Item><Link to='/offers' className='sub-menu'onClick={onSetVisible} >Все</Link></NavDropdown.Item> 
+                   <NavDropdown.Item><Link to='/cupboards' className='sub-menu' onClick={onSetVisible}>Шкафы</Link></NavDropdown.Item> 
+                   <NavDropdown.Item><Link to='/beds' className='sub-menu' onClick={onSetVisible}>Кровати</Link></NavDropdown.Item> 
+                   <NavDropdown.Item><Link to='/offers' className='sub-menu' onClick={onSetVisible}>Стулья</Link></NavDropdown.Item> 
+                   <NavDropdown.Item><Link to='/offers' className='sub-menu' onClick={onSetVisible}>Кухня</Link></NavDropdown.Item> 
                 </NavDropdown>
                 <NavDropdown title='Комнаты'>
-                   <NavDropdown.Item>Гостинная</NavDropdown.Item> 
-                   <NavDropdown.Item>Спальня</NavDropdown.Item> 
-                   <NavDropdown.Item>Кухня</NavDropdown.Item> 
-                   <NavDropdown.Item>Детская</NavDropdown.Item> 
-                   <NavDropdown.Item>Рабочий кабинет</NavDropdown.Item> 
-                   <NavDropdown.Item>Прихожая</NavDropdown.Item> 
+                   <NavDropdown.Item onClick={onSetVisible}>Гостинная</NavDropdown.Item> 
+                   <NavDropdown.Item onClick={onSetVisible}>Спальня</NavDropdown.Item> 
+                   <NavDropdown.Item onClick={onSetVisible}>Кухня</NavDropdown.Item> 
+                   <NavDropdown.Item onClick={onSetVisible}>Детская</NavDropdown.Item> 
+                   <NavDropdown.Item onClick={onSetVisible}>Рабочий кабинет</NavDropdown.Item> 
+                   <NavDropdown.Item onClick={onSetVisible}>Прихожая</NavDropdown.Item> 
                 </NavDropdown>
                 <Nav.Link>Услуги</Nav.Link>
                 <Nav.Link>Вдохновление</Nav.Link>
+                <Nav.Link ><Link to='/likes' onClick={onSetVisible} className='link'>Избранные</Link></Nav.Link>
+                <Nav.Link> <Link to='/cart' onClick={onSetVisible} className='link'>Корзина</Link></Nav.Link>
+                <div className='burger-menu__account'>
+                <hr/>
+                    <Nav.Link to='/cart'>Имя:Name</Nav.Link>
+                    <Nav.Link to='/cart'>На счету: 10 000тг</Nav.Link>
+                    <Nav.Link to='/cart'>Выйти</Nav.Link>
+                </div>
             </Nav>
         </>
     )

@@ -1,0 +1,114 @@
+.login {
+    // .login__body
+    
+    &__body {
+        display: flex;
+        align-items: center;
+    }
+    
+    // .login__welcom
+    
+    &__welcom {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex:1 0 0;
+        background-color: $blue;
+        height: 100vh;
+    }
+    
+    // .login__back
+    &__back {
+        position: absolute;
+        top:0;
+        left: 0;
+        padding: 30px;
+    }
+    &__back:hover {
+        cursor: pointer;
+    }
+    
+    // .login__text
+    
+    &__text {
+        padding: 0px 30px;
+        color: #fff;
+        h4{
+            font-size: 40px;
+            font-weight: 600;
+        }
+        span{
+            color: $orange;
+        }
+    }
+    
+    // .login__inputs
+    .back{
+        position: absolute;
+        left: 0;
+        top: 0;
+        margin: 30px;
+        display: none;
+    }
+    &__sign{
+        margin-top: -50px;
+        margin-bottom: 40px;
+        display: none;
+    }
+    &__inputs {
+        height: 100vh;
+        flex:1.5 0 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: 0px 50px;
+        input{
+            max-width: 500px;
+            border: none;
+            color: black;
+            border-bottom: 1px solid gray;
+            margin: 10px 0px;
+        }
+        a{
+            margin-bottom: 10px;
+        }
+        button{
+            max-width: 500px;
+            margin: 6px 0px;
+        }
+    }
+    }
+
+@media (max-width:1220px) {
+    .login__text {
+        h4{
+            font-size: 28px;
+        }
+        p{
+            font-size: 14px;
+        }
+    }
+}
+
+@media (max-width:768px) {
+    .login{
+        &__welcom{
+            display: none;
+        }
+        .back{
+            display: block;
+        }
+        &__inputs {
+            input{
+                max-width: 600px;
+            }
+            button{
+                max-width: 600px;
+            }
+        }
+        &__sign{
+            display: block;
+        }
+    }
+}
+    

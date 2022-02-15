@@ -3,6 +3,7 @@ import { Container } from 'react-bootstrap'
 import { useLocation } from 'react-router-dom'
 import Card from '../../components/Card';
 import { data } from '../../data';
+import Layout from '../../layout/Layout';
 
 const OffersContainer = () => {
     const {pathname} = useLocation();
@@ -34,14 +35,20 @@ const OffersContainer = () => {
     },[pathname])
 
     return (
-        <Container>
-            <div className="offers">
-                {title}
-                {items.map((item)=>{
-                    return <Card key={item.id} title={item.title} description={item.description} price={item.price} img={item.img} id={item.id}/>
-                })}
-            </div>   
-        </Container>
+        <Layout>
+            <div className="wrapper">
+                <div className="content">
+                    <Container>
+                        <div className="offers">
+                            {title}
+                            {items.map((item)=>{
+                                return <Card key={item.id} title={item.title} description={item.description} price={item.price} img={item.img} id={item.id}/>
+                            })}
+                        </div>   
+                    </Container>
+                </div>
+            </div>
+        </Layout>
     )
 }
 

@@ -5,6 +5,7 @@ import { data } from '../../data'
 import { useDispatch } from 'react-redux'
 import { setCart } from '../../store/reducers/cart'
 import Item from './Item'
+import Layout from '../../layout/Layout'
 
 
 const ItemContainer = ({}) => {
@@ -25,11 +26,13 @@ const ItemContainer = ({}) => {
     }, [currentProduct,productId])
 
     return (
-        <div className="item">
-            <Container>
-               <Item currentProduct={currentProduct} onSetToCart={onSetToCart}/>
-            </Container>
-        </div>
+        <Layout>
+            <div className="item">
+                <Container>
+                <Item currentProduct={currentProduct} onSetToCart={onSetToCart}/>
+                </Container>
+            </div>
+        </Layout>
     )
 }
 

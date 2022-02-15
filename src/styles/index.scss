@@ -20,7 +20,7 @@ input{
 }
 
 .content {
-    min-height: calc(100vh - 350px);
+    min-height: calc(100vh - 310px);
 }
 
 .dropdown-toggle.nav-link::after{
@@ -105,14 +105,11 @@ input{
         margin: 10px 0px;
     }
 }
-.login{
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-color: #fff;
-    width: 100%;
-    height: 100%;
-    z-index: 10;
+
+
+.link{
+    color: rgba(17, 17, 17, 0.55);
+    text-decoration: none;
 }
 
 @media (min-width: 1920px){

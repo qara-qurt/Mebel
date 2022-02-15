@@ -16,9 +16,6 @@ import Login from './pages/Login/Login';
 function App() {
   return (
     <>
-    <Header/>
-    <div className="wrapper">
-      <div className="content">
       <Routes>
         <Route path='/' element={<Main />} />
         <Route path='/offers' element={<OffersContainer />}>
@@ -37,9 +34,6 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path="*" element={<Error />}/>
       </Routes>
-      </div>
-      <Footer/>
-    </div>
     </>
   );
 }
