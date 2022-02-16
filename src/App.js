@@ -1,10 +1,6 @@
 import React from 'react';
 import "./styles/index.scss"
 import { Route, Routes } from 'react-router';
-
-import { Header } from './layout/Header';
-import { Footer } from './layout/Footer';
-
 import Main from './pages/Main';
 import Admin from './pages/Admin';
 import Error from './pages/Error';
