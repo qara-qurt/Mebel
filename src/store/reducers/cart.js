@@ -21,13 +21,12 @@ const getItemCount = (state,id) => {
         }
     }
 }
-
 const addToLocalStorage = (state) => {
     localStorage.setItem("cart",JSON.stringify(state))
 }
 
 
-export const counterSlice = createSlice({
+export const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
@@ -86,6 +85,8 @@ export const counterSlice = createSlice({
     minusCart:(state,action) => {
         if(state.count==1){
             state.cart = []
+            state.count = 0
+            state.allPrice = 0
         }
         state.cart.map(val=>{
             if(val.id===action.payload.id){
@@ -106,6 +107,6 @@ export const counterSlice = createSlice({
   },
 })
 
-export const { setCart,deleteCart,plusCart,minusCart } = counterSlice.actions
+export const { setCart,deleteCart,plusCart,minusCart } = cartSlice.actions
 
-export default counterSlice.reducer
+export default cartSlice.reducer

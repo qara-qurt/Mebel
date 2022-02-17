@@ -4,7 +4,7 @@ const initialState = {
   products:[]
 }
 
-export const counterSlice = createSlice({
+export const productSlice = createSlice({
   name: 'products',
   initialState,
   reducers: {
@@ -14,6 +14,6 @@ export const counterSlice = createSlice({
   },
 })
 
-export const { setProducts } = counterSlice.actions
+export const { setProducts } = productSlice.actions
 
-export default counterSlice.reducer
+export default productSlice.reducer

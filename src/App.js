@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import "./styles/index.scss"
 import { Route, Routes } from 'react-router';
 import Main from './pages/Main';
@@ -8,8 +8,20 @@ import OffersContainer from './pages/Offers/OffersContainer';
 import CartContainer from './pages/Cart/CartContainer';
 import ItemContainer from './pages/Item/ItemContainer';
 import Login from './pages/Login/Login';
+import useAuth from './hooks/useAuth';
+import { useDispatch } from 'react-redux';
+import { autoLogin } from './store/reducers/auth';
+import Register from './pages/Register/Register';
+import SendMessageToEmail from './pages/ResetPassword/SendMessageToEmail';
 
 function App() {
+  const {isAuth} = useAuth();
+  const dispatch = useDispatch();
+
+  useEffect(()=>{
+    dispatch(autoLogin())
+  },[isAuth])
+
   return (
     <>
       <Routes>
@@ -28,6 +40,8 @@ function App() {
         <Route path='/cart' element={<CartContainer />} />
         <Route path='/admin' element={<Admin />} />
         <Route path='/login' element={<Login />} />
+        <Route path='/register' element={<Register />} />
+        <Route path='/forgotPassword' element={<SendMessageToEmail />} />
         <Route path="*" element={<Error />}/>
       </Routes>
     </>

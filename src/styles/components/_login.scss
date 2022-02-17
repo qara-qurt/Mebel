@@ -56,14 +56,16 @@
         display: none;
     }
     &__inputs {
-        height: 100vh;
         flex:1.5 0 0;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        margin: 0px 50px;
-        input{
+        .inputs{
+            height: 100vh;
+            margin: 0px 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
             max-width: 500px;
+        }
+        input{
             border: none;
             color: black;
             border-bottom: 1px solid gray;
@@ -73,8 +75,12 @@
             margin-bottom: 10px;
         }
         button{
-            max-width: 500px;
+           
             margin: 6px 0px;
+        }
+        p{
+            font-weight: 500;
+            margin: 0;
         }
     }
     }
