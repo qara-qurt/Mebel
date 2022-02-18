@@ -2,7 +2,6 @@ import { Button, Container, Dropdown, Form,  Modal,  Nav, Navbar, NavDropdown } 
 import user from '../assets/img/user.png';
 import like from '../assets/img/heart.png';
 import basket from '../assets/img/shopping-basket.png';
-import search from '../assets/img/search.png';
 import Icon from '../assets/img/Icon.png';
 import { Link } from 'react-router-dom';
 import { BurgerMenu } from '../components/BurgerMenu';
@@ -11,6 +10,7 @@ import { useDispatch } from 'react-redux';
 import { logOut } from '../store/reducers/auth';
 import useAuth from '../hooks/useAuth';
 import { useState } from 'react';
+import Search from '../components/Search';
 
 export const Header = () => {
     const {count} = useSelector(state => state.cart)
@@ -51,10 +51,7 @@ export const Header = () => {
                 <Nav.Link>Вдохновление</Nav.Link>
               </Nav>
                 <Form className="d-flex">
-                  <div className="header__search d-flex align-items-center">
-                    <img src={search} className='icon' alt="" />
-                    <input type="text" placeholder='Что вы ищете?'/>
-                  </div>
+                  <Search placeholder={"Что вы ищите?"}/>
                 </Form>
                 <div className='menu-adapt'>
                   <div className="icons">

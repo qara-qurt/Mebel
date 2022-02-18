@@ -1,0 +1,111 @@
+.admin {
+    display: flex;
+    &__create{
+        flex: 1 0 0;
+        padding-left: 50px;
+        h5{
+            margin-top: 25px;
+            font-weight: 600;
+        }
+    }
+    &__products{
+        flex: 2 0 0;
+    }
+}
+
+.create {
+    &__inputs {
+        margin-left: 10px;
+        display: flex;
+        flex-direction: column;
+        h6{
+            margin-left: -10px;
+        }
+    }
+    &__inputs-sizes {
+        margin-left: 10px;
+        display: flex;
+        flex-direction: column;
+        h6{
+            margin-left: -10px;
+        }
+    }
+    &__photos{
+        display: flex;
+        flex-direction: column;
+        margin-left: 10px;
+        h6{
+            margin-left: -10px;
+        }
+    }
+    &__button{
+        margin-top: 20px;
+        text-align: end;
+    }
+}
+    
+
+.products {
+    &__header {
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        h5{
+            margin: 0;
+            font-weight: 600;
+        }
+    }
+    &__search {
+    }
+    &__carts {
+        margin: 20px 0px;
+    }
+    &__pagination {
+    }
+}
+
+.product {
+    &__cart {
+        display: flex;
+        align-items: center;
+        border-top: 1px solid $gray;
+        padding: 5px 0px;
+    }
+}
+
+.cart {
+    &__img {
+        img{
+            width: 80px;
+            height: 80px;
+        }
+    }
+    &__info {
+        display: flex;
+        flex-direction: column;
+        font-weight: 500;
+    }
+    &__name {
+        display: flex;
+        p{
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+    }
+    &__buttons {
+        display: flex;
+    }
+    &__delete {
+        cursor: pointer;
+        margin-right: 10px;
+        color: $red;
+    }
+    &__edit {
+        cursor: pointer;
+        color: $orange;
+    }
+}
+    
+
+    

@@ -36,6 +36,12 @@ const Input = ({name,type,placeholder,value,setValue}) => {
                     setError("")
                 }
                 break;
+            default:
+                if(!e.target.value){
+                    setError("*Обязательое поле")
+                }else{
+                    setError("")
+                }
         }
             
     }
@@ -43,7 +49,7 @@ const Input = ({name,type,placeholder,value,setValue}) => {
     return (
         <>
             {(dirty && error)&& <p style={{fontSize:12,margin:0,color:'#f34336'}}>{error}</p>}
-            <input type={type} onBlur={blueHandler} placeholder={placeholder} value={value} onChange={valueHandler}/>
+            <input type={type} onBlur={blueHandler} placeholder={placeholder} value={value} onChange={valueHandler} className="input"/>
         </>
     )
 }
