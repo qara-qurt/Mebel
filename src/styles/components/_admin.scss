@@ -11,6 +11,13 @@
     &__products{
         flex: 2 0 0;
     }
+    &__create-mobile{
+        width: 100%;
+        padding: 10px 20px;
+    }
+    &__goBack{
+        margin: 20px 0px;
+    }
 }
 
 .create {
@@ -63,6 +70,23 @@
     }
     &__pagination {
     }
+    &__add{
+        display: none;
+        cursor: pointer;
+        position: absolute;
+        right: 45px;
+        bottom: 240px;
+        background-color: $orange;
+        width: 50px;
+        height: 50px;
+        border: none;
+        border-radius: 50px;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-weight: 500;
+        font-size: 58px;
+    }
 }
 
 .product {
@@ -76,6 +100,7 @@
 
 .cart {
     &__img {
+        margin-right: 10px;
         img{
             width: 80px;
             height: 80px;
@@ -89,8 +114,8 @@
     &__name {
         display: flex;
         p{
-            margin-right: 10px;
-            margin-bottom: 10px;
+            margin-right: 5px;
+            margin-bottom: 5px;
         }
     }
     &__buttons {
@@ -101,11 +126,31 @@
         margin-right: 10px;
         color: $red;
     }
-    &__edit {
-        cursor: pointer;
-        color: $orange;
+    &__description{
+        display:flex;
+        margin-top: -5px;
+        margin-bottom: 5px;
+        p{
+            margin: 0;
+            font-size: 14px;
+            font-weight: 400;
+            color:$dark-gray;
+        }
     }
 }
     
+@media(max-width:1024px){
+    .admin__create{
+        display: none;
+    }
+    .products__add{
+        display: flex;
+    }
+}
 
+@media(max-width:445px){
+    .products__header{
+        flex-direction: column;
+    }
+}
     

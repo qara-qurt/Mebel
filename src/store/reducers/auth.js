@@ -3,8 +3,8 @@ import axios from 'axios'
 
 const initialState = {
   isAuth:false,
-  user:null,
-  loading:false,
+  user: null,
+  loading: false,
   status:null
 }
 
@@ -93,9 +93,10 @@ export const authSlice = createSlice({
         state.user = action.payload.email
         state.isAuth = true
         state.status = '200'
+        console.log(action.payload);
         localStorage.setItem('Token',JSON.stringify(action.payload.idToken))
         localStorage.setItem('UserId',JSON.stringify(action.payload.localId))
-        localStorage.setItem('Email',JSON.stringify(action.payload.email))
+        localStorage.setItem('Email', JSON.stringify(action.payload.email))
       },
       [fetchLogin.rejected]:(state)=>{
         state.loading = false

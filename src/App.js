@@ -13,6 +13,7 @@ import { useDispatch } from 'react-redux';
 import { autoLogin } from './store/reducers/auth';
 import Register from './pages/Register/Register';
 import SendMessageToEmail from './pages/ResetPassword/SendMessageToEmail';
+import AdminCreateProduct from './components/AdminCreateProduct';
 
 function App() {
   const {isAuth} = useAuth();
@@ -39,10 +40,11 @@ function App() {
         </Route>
         <Route path='/cart' element={<CartContainer />} />
         <Route path='/admin' element={<Admin />} />
+        <Route path='/admin/add' element={<AdminCreateProduct mobile={true}/>} />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
         <Route path='/forgotPassword' element={<SendMessageToEmail />} />
-        <Route path="*" element={<Error />}/>
+        <Route path="*" element={<Error />} />      
       </Routes>
     </>
   );

@@ -1,160 +1,92 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Pagination, Spinner } from 'react-bootstrap';
+import { Container, Pagination } from 'react-bootstrap';
 import Search from '../components/Search';
 import Layout from '../layout/Layout';
 import AdminProductCart from '../components/AdminProducCard';
-import Input from '../components/Input';
-import LoginButton from '../components/LoginButton';
 import axios from 'axios';
-import { useDispatch } from 'react-redux';
-import { fetchCreateProduct } from '../store/reducers/products';
-import { useSelector } from 'react-redux';
+import AdminCreateProduct from '../components/AdminCreateProduct';
+import { useNavigate } from 'react-router-dom';
 
 const Admin = () => {
-  const dispatch = useDispatch();
-  const {loading} = useSelector(state=>state.products)
+  const navigate = useNavigate();
+  const [products, setProducts] = useState([]);
+  const [rerender, setRerender] = useState(false);
 
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
-  const [price, setPrice] = useState('');
-  //Sizes input value
-  const [width, setWidth] = useState('');
-  const [height, setHeight] = useState('');
-  const [depth, setDepth] = useState('');
-  //Colors
-  const [colors, setColors] = useState('');
-  //Material
-  const [material, setMaterial] = useState('');
-  //photos
-  const [photos, setPhotos] = useState([]);
-  const [photoUrls,setPhotoUrls] = useState([]);
-
-  const [disabled,setDisabled] = useState(true)
-
-  const nameHandler = (e) =>{
-    setName(e.target.value)
-  }
-  const descriptionHandler = (e) =>{
-    setDescription(e.target.value)
-  }
-  const priceHandler = (e) =>{
-    setPrice(e.target.value)
-  }
-  const widthHandler = (e) =>{
-    setWidth(e.target.value)
-  }
-  const heightHandler = (e) =>{
-    setHeight(e.target.value)
-  }
-  const depthHandler = (e) =>{
-    setDepth(e.target.value)
-  }
-  const colorsHandler = (e) =>{
-    setColors(e.target.value)
-  }
-  const materialHandler = (e) =>{
-    setMaterial(e.target.value)
-  }
-
-  useEffect(()=>{
-    if(name!='' && description!='' && price!='' && width!='' && height!='' && depth!='' && colors!='' && material!='' && photos.length==4 ){
-        setDisabled(false)
-    }else{
-      setDisabled(true)
+  const deleteProduct = async (id, photos) => {
+    const url = `https://mebel-f0c71-default-rtdb.europe-west1.firebasedatabase.app/products/${id}.json`;
+    try {
+      const response = await axios.delete(url);
+      if (response.status == '200') {
+        // deleteImgFromCloud(photos)
+        getProducts();
+      }
+    } catch (error) {
+      console.log(error);
     }
-  },[name,description,price,width,height,depth,colors,material,photos])
+    getProducts();
+  };
+
+  const getProducts = async () => {
+    const url = 'https://mebel-f0c71-default-rtdb.europe-west1.firebasedatabase.app/products.json';
+    try {
+      const response = await axios.get(url);
+      if (response.status === 200) {
+        if (response.data) {
+          const data = Object.keys(response.data).map((product) => {
+            return { id: product, data: response.data[product] };
+          });
+          setProducts(data);
+        } else {
+          setProducts([]);
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const pushToAddProduct = () =>{
+    navigate('/admin/add')
+  }
+
+  useEffect(async () => {
+    getProducts();
+  }, [rerender]);
   
-  const uploadData = async() =>{
-    if(photos.length==4){
-        photos.forEach(async(photo)=>{
-            const formData = new FormData()
-            formData.append('file',photo)
-            formData.append('upload_preset','f1vguzfd')
-            let responseImg = await axios.post('https://api.cloudinary.com/v1_1/mebelproject/image/upload',formData)
-            let url = responseImg.data.secure_url
-            setPhotoUrls(prev=>[...prev,url])
-        })
-    }
- ///ОШИБКА СРАЗУ НЕ ОТПАРВЛЯЕТ АССИНХРОНЩИНА
-   if(photoUrls.length>1){
-    const data = {
-        "name":name,
-        "description":description,
-        "price":price,
-        "size":[width,height,depth],
-        "colors":colors,
-        "material":material,
-        "photos":photoUrls
-    }
-    dispatch(fetchCreateProduct(data))
-   }
-  }
-  const onSubmit = () =>{
-    uploadData()
-  }
+
   return (
     <Layout>
-        <Container>
-            <div className='admin'>
-                <div className='admin__products'>
-                    <div className='products__header'>
-                        <h5>Товары: 100</h5>
-                        <div className='products__search'>
-                            <Search placeholder={'Поиск'} maxWidth={300}/>
-                        </div>
-                    </div>
-                    <div className='products__carts'>
-                        <AdminProductCart />
-                        <AdminProductCart />
-                        <AdminProductCart />
-                        <AdminProductCart />
-                        <AdminProductCart />
-                        <AdminProductCart />
-                        <AdminProductCart />
-                        <AdminProductCart />
-                        <AdminProductCart />
-                    </div>                   
-                   <Pagination />
-                </div>
-                <div className='admin__create'>
-                    <div className="create">
-                        <h5>Добаваить товар</h5>
-                        <div className="create__inputs">
-                            <Input name='name'  type='text' placeholder='Назваение' value={name} setValue={nameHandler} /> 
-                            <Input name='description'  type='text' placeholder='Описание' value={description} setValue={descriptionHandler} /> 
-                            <Input name='price'  type='text' placeholder='Цена' value={price} setValue={priceHandler} /> 
-                        </div>
-                        <div className="create__inputs-sizes">
-                            <h6>Размер:</h6>
-                            <Input name='width'  type='text' placeholder='Ширина' value={width} setValue={widthHandler} /> 
-                            <Input name='height'  type='text' placeholder='Высота' value={height} setValue={heightHandler} /> 
-                            <Input name='depth'  type='text' placeholder='Глубина' value={depth} setValue={depthHandler} /> 
-                        </div>
-                        <div className="create__inputs">
-                            <h6>Цвета:</h6>
-                            <Input name='colors'  type='text' placeholder='Белый, черный и т.д' value={colors} setValue={colorsHandler} /> 
-                        </div>
-                        <div className="create__inputs">
-                            <h6>Материал и уход(полезная информация):</h6>
-                            <Input name='material'  type='text' placeholder='Березове дерево, влагостойкая и т.д' value={material} setValue={materialHandler} /> 
-                        </div>
-                        <div className="create__photos">
-                            <h6>Фоторграфии(4):</h6>
-                            <input type="file" onChange={(e)=>setPhotos(prev=>[...prev,e.target.files[0]])}/>
-                            <input type="file" onChange={(e)=>setPhotos(prev=>[...prev,e.target.files[0]])}/>
-                            <input type="file" onChange={(e)=>setPhotos(prev=>[...prev,e.target.files[0]])}/>
-                            <input type="file" onChange={(e)=>setPhotos(prev=>[...prev,e.target.files[0]])}/>
-                        </div>
-                        <div className="create__button">
-                            {loading
-                            ?<div style={{marginRight:30}}><Spinner animation="border" variant="primary" /></div>
-                            :<LoginButton disabled={disabled} title={"Создать"} color={"#111111"} textColor={"#fff"} onClick={onSubmit} width={100}/>
-                            }                          
-                        </div>
-                    </div>
-                </div>
+      <Container>
+        <div className='admin'>
+          <div className='admin__products'>
+            <div className='products__header'>
+              <h5>Товары: 100</h5>
+              <div className='products__search'>
+                <Search placeholder={'Поиск'} maxWidth={300} />
+              </div>
             </div>
-        </Container>
+            <div className='products__carts'>
+              {products.length != 0 ? (
+                products.map((product) => (
+                  <AdminProductCart
+                    key={product.id}
+                    id={product.id}
+                    data={product.data}
+                    deleteProduct={deleteProduct}
+                  />
+                ))
+              ) : (
+                <p style={{ fontSize: 26, fontWeight: 600, textAlign: 'center', marginTop: 50 }}>
+                  Пусто!
+                </p>
+              )}
+            </div>
+            <Pagination />
+          </div>
+          <AdminCreateProduct rerender={rerender} setRerender={setRerender} mobile={false}/>
+          <div className='products__add' onClick={pushToAddProduct}>+</div>
+        </div>
+      </Container>
     </Layout>
   );
 };

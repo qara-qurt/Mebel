@@ -10,7 +10,6 @@ export const fetchCreateProduct = createAsyncThunk(
   'products/fetchCreateProduct',
   async (data,{rejectWithValue}) => {
       const url = 'https://mebel-f0c71-default-rtdb.europe-west1.firebasedatabase.app/products.json'
-      console.log(data.photos);
       try{
          const response = await axios.post(url,{
           name:data.name,
@@ -29,6 +28,15 @@ export const fetchCreateProduct = createAsyncThunk(
   }
 )
 
+// const deleteImgFromCloud = async (photos) =>{
+//   photos.map(async (photo) => {
+//     console.log(photo.publicId);
+//     const res = await axios.post('https://api.cloudinary.com/v1_1/mebelproject/image/destroy', photo.publicId)
+//     if (res.status == 200) {
+//       console.log(res);
+//     }
+//   })
+// }
 
 export const productSlice = createSlice({
   name: 'products',
@@ -37,20 +45,14 @@ export const productSlice = createSlice({
     setProducts: (state,action) => {
       state.products.push(action.payload.data)
     },
+    setLoading:(state,action)=>{
+      state.loading = action.payload
+    }
   },
   extraReducers:{
-    [fetchCreateProduct.pending]:(state)=>{
-      state.loading = true
-    },
-    [fetchCreateProduct.fulfilled]:(state)=>{
-      state.loading = false
-    },
-    [fetchCreateProduct.rejected]:(state)=>{
-      state.loading = false
-    },
   }
 })
 
-export const { setProducts } = productSlice.actions
+export const { setProducts,setLoading } = productSlice.actions
 
 export default productSlice.reducer
