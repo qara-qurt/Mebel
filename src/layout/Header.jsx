@@ -20,12 +20,14 @@ import { logOut } from '../store/reducers/auth';
 import useAuth from '../hooks/useAuth';
 import { useState } from 'react';
 import Search from '../components/Search';
+import ModalView from '../components/Modal';
 
 export const Header = () => {
   const { count } = useSelector((state) => state.cart);
+  const { likesCount } = useSelector((state) => state.like);
   const dispatch = useDispatch();
   const { isAuth, email } = useAuth();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [show, setShow] = useState(false);
 
@@ -88,7 +90,9 @@ export const Header = () => {
                     <>
                       <Dropdown.ItemText>{email}</Dropdown.ItemText>
                       <Dropdown.ItemText>Money: 10 000$</Dropdown.ItemText>
-                      <NavDropdown.Item><div onClick={()=>navigate('/admin')}>Панель админа</div></NavDropdown.Item>
+                      <NavDropdown.Item>
+                        <div onClick={() => navigate('/admin')}>Панель админа</div>
+                      </NavDropdown.Item>
                       <NavDropdown.Item>
                         <div onClick={handleShow}>Выйти</div>
                       </NavDropdown.Item>
@@ -103,6 +107,7 @@ export const Header = () => {
                 </NavDropdown>
                 <Link to='/likes'>
                   <img className='icon' src={like} alt='' />
+                  {likesCount > 0 && <span className='cart-count'>{likesCount}</span>}
                 </Link>
                 <Link to='/cart'>
                   <img className='icon' src={basket} alt='' />
@@ -114,19 +119,12 @@ export const Header = () => {
           </Container>
         </Navbar>
       </header>
-      <Modal show={show} onHide={handleClose} size='sm'>
-        <Modal.Header closeButton style={{ alignItems: 'flex-start' }}>
-          <p>Вы уверены что хотите выйти?</p>
-        </Modal.Header>
-        <Modal.Footer>
-          <Button variant='secondary' onClick={handleClose}>
-            Отмена
-          </Button>
-          <Button variant='primary' onClick={onLogOut}>
-            Да
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      <ModalView
+        show={show}
+        handleClose={handleClose}
+        onClick={onLogOut}
+        text={'Вы уверены что хотите выйти?'}
+      />
     </>
   );
 };

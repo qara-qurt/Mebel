@@ -1,0 +1,39 @@
+.likes {
+    h5{
+        margin-top: 20px;
+    }
+    &__cards{
+        margin-top: 30px;
+    }
+    &__card {
+        padding: 5px 0px;
+        display:flex;
+        align-items: center;
+        border-top: 1px solid $gray;
+    }
+    &__img {
+        cursor: pointer;
+        margin-right: 10px;
+        img{
+            width: 150px;
+            height: 150px;
+        }
+    }
+    &__title {
+        cursor: pointer;
+        font-weight: 700;
+        display:flex;
+        h6{
+            margin-right: 10px;
+        }
+    }
+    &__description {
+        color:$dark-gray;
+    }
+}
+.delete {
+    cursor: pointer;
+    color:$red;
+    font-weight: 600;
+}
+    

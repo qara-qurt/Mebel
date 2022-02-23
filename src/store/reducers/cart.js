@@ -34,7 +34,7 @@ export const cartSlice = createSlice({
         const newItems = {
             ...action.payload,
             count:1 ,
-            price:action.payload.price,
+            price: parseInt(action.payload.price)
         }
         if(state.cart.length===0){
             state.cart.push(newItems)

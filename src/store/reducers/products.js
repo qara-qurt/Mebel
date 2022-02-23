@@ -4,6 +4,7 @@ import axios from 'axios'
 const initialState = {
   products:[],
   loading:false,
+  error:null,
 }
 
 export const fetchCreateProduct = createAsyncThunk(
@@ -28,6 +29,21 @@ export const fetchCreateProduct = createAsyncThunk(
   }
 )
 
+export const fetchGetProducts = createAsyncThunk(
+  'products/fetchGetProducts',
+  async (_,{rejectWithValue}) => {
+      const url = 'https://mebel-f0c71-default-rtdb.europe-west1.firebasedatabase.app/products.json'
+      try{
+         const response = await axios.get(url)
+         if(response.status == '200'){
+          return Object.keys(response.data).map((product) => ({ id: product, data: response.data[product] }));
+         }
+      }catch(error){
+          return rejectWithValue(error.messages)
+      }
+  }
+)
+
 // const deleteImgFromCloud = async (photos) =>{
 //   photos.map(async (photo) => {
 //     console.log(photo.publicId);
@@ -42,14 +58,22 @@ export const productSlice = createSlice({
   name: 'products',
   initialState,
   reducers: {
-    setProducts: (state,action) => {
-      state.products.push(action.payload.data)
-    },
     setLoading:(state,action)=>{
       state.loading = action.payload
     }
   },
   extraReducers:{
+    [fetchGetProducts.pending]:(state)=>{
+      state.loading = true
+    },
+    [fetchGetProducts.fulfilled]:(state,action)=>{
+      state.loading = false
+      state.products = action.payload
+    },
+    [fetchGetProducts.rejected]:(state)=>{
+      state.loading = false
+      state.error = 'error'
+    },
   }
 })
 

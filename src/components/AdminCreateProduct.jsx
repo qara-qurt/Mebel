@@ -7,7 +7,6 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { fetchCreateProduct, setLoading } from '../store/reducers/products';
 import { useSelector } from 'react-redux';
-import Layout from '../layout/Layout';
 import { useNavigate } from 'react-router-dom';
 
 const AdminCreateProduct = ({ rerender, setRerender,mobile }) => {
@@ -116,7 +115,7 @@ const AdminCreateProduct = ({ rerender, setRerender,mobile }) => {
                       const data = {
                         name: name,
                         description: description,
-                        price: price,
+                        price: Number(price.replace(" ","")),
                         size: [width, height, depth],
                         colors: colors,
                         material: material,
@@ -138,6 +137,7 @@ const AdminCreateProduct = ({ rerender, setRerender,mobile }) => {
                       setDepth('');
                       setColors('');
                       setMaterial('');
+                      setPhotos([])
                       setRerender(!rerender);
                     });
                 });
@@ -231,10 +231,10 @@ const AdminCreateProduct = ({ rerender, setRerender,mobile }) => {
         </div>
         <div className='create__photos'>
           <h6>Фоторграфии(4):</h6>
-          <input type='file' onChange={(e) => setPhotos((prev) => [...prev, e.target.files[0]])} />
-          <input type='file' onChange={(e) => setPhotos((prev) => [...prev, e.target.files[0]])} />
-          <input type='file' onChange={(e) => setPhotos((prev) => [...prev, e.target.files[0]])} />
-          <input type='file' onChange={(e) => setPhotos((prev) => [...prev, e.target.files[0]])} />
+          <input type='file'  onChange={(e) => setPhotos((prev) => [...prev, e.target.files[0]])} />
+          <input type='file'  onChange={(e) => setPhotos((prev) => [...prev, e.target.files[0]])} />
+          <input type='file'  onChange={(e) => setPhotos((prev) => [...prev, e.target.files[0]])} />
+          <input type='file'  onChange={(e) => setPhotos((prev) => [...prev, e.target.files[0]])} />
         </div>
         <div className='create__button'>
           {loading ? (

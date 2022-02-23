@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
-import item1 from '../assets/img/item1.jpg';
 
 const AdminProducCard = ({ id, data, deleteProduct }) => {
   const [show, setShow] = useState(false);

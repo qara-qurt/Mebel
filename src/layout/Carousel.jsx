@@ -8,14 +8,19 @@ import SwiperCore, {
     Scrollbar
   } from 'swiper';
 import Card from '../components/Card';
+import Loader from '../components/Loader';
+import { useSelector } from 'react-redux';
 
 
 
 SwiperCore.use([Scrollbar,Navigation]);
 
 const Carousel = ({items}) => {
+    const {loading} = useSelector(state=>state.products)
     return (
-        <Swiper scrollbar={{
+        <>
+        {loading?[0,0,0,0].map((_,index)=><div key={index} style={{marginLeft:20,marginRight:100}}><Loader /></div>)
+        :<Swiper scrollbar={{
             "hide": true
           }} 
           breakpoints={{
@@ -44,11 +49,12 @@ const Carousel = ({items}) => {
               {items.map((item)=>{
                   return(
                     <SwiperSlide key={item.id}>
-                        <Card title={item.title} description={item.description} price={item.price} img={item.img} id={item.id}/>
+                        <Card title={item.data.name} description={item.data.description} price={item.data.price} img={item.data.photos[0].photoUrl} id={item.id}/> 
                     </SwiperSlide>
                   )
               })}
-        </Swiper>
+        </Swiper>}
+        </>
     )
 }
 

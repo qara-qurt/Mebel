@@ -6,30 +6,37 @@ import { useDispatch } from 'react-redux'
 import { setCart } from '../../store/reducers/cart'
 import Item from './Item'
 import Layout from '../../layout/Layout'
-
+import axios from 'axios'
+import { useAlert } from 'react-alert'
 
 const ItemContainer = ({}) => {
     const {productId} = useParams()
     const dispatch = useDispatch()
-    const [currentProduct,setCurrentProduct] = useState({})
+    const [currentProduct,setCurrentProduct] = useState(null)
+    const alert = useAlert()
 
     const onSetToCart = () =>{
+        alert.show("Добавлено в корзину!")
         dispatch(setCart(currentProduct))
     }
 
-    useEffect(() => {
-        data.forEach(val=>{
-            if(val.id===parseInt(productId)){
-                setCurrentProduct(prev=>prev=val)
-            }
-        })
-    }, [currentProduct,productId])
+    useEffect(async() => {
+        const url = `https://mebel-f0c71-default-rtdb.europe-west1.firebasedatabase.app/products/${productId}.json`
+        try{
+           const response = await axios.get(url)
+           if(response.status == '200'){
+                setCurrentProduct(response.data)
+           }
+        }catch(error){
+            throw Error(error);
+        }
+    }, [])
 
     return (
         <Layout>
             <div className="item">
                 <Container>
-                <Item currentProduct={currentProduct} onSetToCart={onSetToCart}/>
+                {currentProduct!=null&&<Item currentProduct={currentProduct} onSetToCart={onSetToCart}/>}
                 </Container>
             </div>
         </Layout>

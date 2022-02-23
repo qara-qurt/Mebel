@@ -13,15 +13,15 @@ const Item = ({currentProduct,onSetToCart}) => {
         <Row className="item__body">
             <Col md={7} className="item__imges">
                 <Row>
-                    <Col md={6}><img className='img' src={item1} alt="" /></Col>
-                    <Col md={6}><img className='img' src={item2} alt="" /></Col>
-                    <Col md={6}><img className='img' src={item3} alt="" /></Col>
-                    <Col md={6}><img className='img' src={item4} alt="" /></Col>
+                    <Col md={6}><img className='img' src={currentProduct.photos[0].photoUrl} alt="" /></Col>
+                    <Col md={6}><img className='img' src={currentProduct.photos[1].photoUrl} alt="" /></Col>
+                    <Col md={6}><img className='img' src={currentProduct.photos[2].photoUrl} alt="" /></Col>
+                    <Col md={6}><img className='img' src={currentProduct.photos[3].photoUrl} alt="" /></Col>
                 </Row>
             </Col>
             <Col  md={5} className="item__info">
                 <div className="item__title">
-                    <h4>{currentProduct.title} -</h4>
+                    <h4>{currentProduct.name} -</h4>
                     <h4> - {currentProduct.price} Тг</h4>
                 </div>
                 <div className="item__more-info">
@@ -29,10 +29,7 @@ const Item = ({currentProduct,onSetToCart}) => {
                 </div>
                 <div className="item__colors">
                     <h4>Цвета:</h4>
-                    <ul>
-                        <li>Белый</li>
-                        <li>Черный</li>
-                    </ul>
+                    <p>{currentProduct.colors}</p>
                 </div>
                 <div className="item__buttons">
                     <div onClick={onSetToCart}>
@@ -45,14 +42,14 @@ const Item = ({currentProduct,onSetToCart}) => {
                 <div className="item__size">
                     <h4>Подробнее о размере товаре:</h4>
                     <ul>
-                        <li>Ширина:***</li>
-                        <li>Глубина:***</li>
-                        <li>Высота:***</li>
+                        <li>Ширина: {currentProduct.size[0]} см</li>
+                        <li>Глубина: {currentProduct.size[2]} см</li>
+                        <li>Высота: {currentProduct.size[1]} см</li>
                     </ul>
                 </div>
                 <div className="item__matelials">
                     <h4>Материалы и уход:</h4>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur libero animi quas impedit natus doloremque! Itaque voluptatibus, repellendus sunt ipsam doloribus eos deserunt aliquid! Sequi ipsa ea inventore itaque odit<span className={visible?'unshow':''} onClick={()=>{setVisible(true)}}>...</span></p>
+                    <p>{currentProduct.material}<span className={visible?'unshow':''} onClick={()=>{setVisible(true)}}>...</span></p>
                     { visible&&
                         <div className={visible?'':'full'}><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur libero animi quas impedit natus doloremque! Itaque voluptatibus, repellendus sunt ipsam doloribus eos deserunt aliquid! Sequi ipsa ea inventore itaque odit.</p>
                             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur libero animi quas impedit natus doloremque! Itaque voluptatibus, repellendus sunt ipsam doloribus eos deserunt aliquid! Sequi ipsa ea inventore itaque odit.</p>

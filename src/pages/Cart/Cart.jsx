@@ -4,7 +4,7 @@ import CardBasket from "../../components/CardBasket"
 const Cart = ({cart,allPrice,onDeleCartItem,onPlusCart,onMinusCart}) => {
     return(
         <Row>
-            <h3 style={{fontWeight:600,marginTop:20}}>Корзина</h3>
+            <h4 style={{fontWeight:500,marginTop:20}}>Корзина</h4>
             <Col lg={8}>
                 {cart.map(item=>{
                     return(

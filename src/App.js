@@ -14,6 +14,7 @@ import { autoLogin } from './store/reducers/auth';
 import Register from './pages/Register/Register';
 import SendMessageToEmail from './pages/ResetPassword/SendMessageToEmail';
 import AdminCreateProduct from './components/AdminCreateProduct';
+import Likes from './pages/Likes/Likes';
 
 function App() {
   const {isAuth} = useAuth();
@@ -39,6 +40,7 @@ function App() {
           <Route path=":productId" element={<OffersContainer />} />
         </Route>
         <Route path='/cart' element={<CartContainer />} />
+        <Route path='/likes' element={<Likes />} />
         <Route path='/admin' element={<Admin />} />
         <Route path='/admin/add' element={<AdminCreateProduct mobile={true}/>} />
         <Route path='/login' element={<Login />} />
