@@ -1,55 +1,126 @@
-import React, { useEffect, useState } from 'react'
-import { Container } from 'react-bootstrap'
-import { useLocation } from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
+import { Container } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { useLocation, useParams, useSearchParams } from 'react-router-dom';
 import Card from '../../components/Card';
-import { data } from '../../data';
+import Loader from '../../components/Loader';
 import Layout from '../../layout/Layout';
+import { fetchGetProducts, fetchSearchProducts } from '../../store/reducers/products';
 
 const OffersContainer = () => {
-    const {pathname} = useLocation();
-    const [title, setTitle] = useState('Все товары')
-    const [items,setItems] = useState([])
+  const { pathname } = useLocation();
+  const [params] = useSearchParams();
+  const dispatch = useDispatch();
+  const { products, loading } = useSelector((state) => state.products);
+  const [title, setTitle] = useState('Все товары');
+  let url = pathname.split('/')[2];
 
-    const getTitleFromUrl = (url) =>{
-        switch(url){
-            case 'cupboards':
-                setTitle("Шкафы")
-                break
-            case 'beds':
-                setTitle("Кровати")
-                break
-        }
+  const getTitleFromUrl = (url) => {
+    switch (url) {
+      case 'cupboard':
+        setTitle('Шкафы');
+        break;
+      case 'bed':
+        setTitle('Кровати');
+        break;
+      case 'couch':
+        setTitle('Диваны');
+        break;
+      case 'chair':
+        setTitle('Стулья');
+        break;
+      case 'chest':
+        setTitle('Комоды');
+        break;
+      case 'rack':
+        setTitle('Стеллажи');
+        break;
+      case 'armchair':
+        setTitle('Кресла');
+        break;
+      case 'kid':
+        setTitle('Детская мебель');
+        break;
+      case 'table':
+        setTitle('Столы');
+        break;
     }
+  };
 
-    useEffect(()=>{
-        let url = pathname.split('/')[2]
-        if(url){
-            getTitleFromUrl(url)
-            //Запрос к бд -->
-            // let res = await axios.get("")
-        }
-        setItems(data)
-        return ()=>{
-            setTitle("Все товары")
-        }
-    },[pathname])
+  const data = products.map((item) => (
+    <Card
+      key={item.id}
+      title={item.data.name}
+      description={item.data.description}
+      price={item.data.price}
+      img={item.data.photos[0].photoUrl}
+      id={item.id}
+    />
+  ));
 
-    return (
-        <Layout>
-            <div className="wrapper">
-                <div className="content">
-                    <Container>
-                        <div className="offers">
-                            {title}
-                            {items.map((item)=>{
-                                return <Card key={item.id} title={item.title} description={item.description} price={item.price} img={item.img} id={item.id}/>
-                            })}
-                        </div>   
-                    </Container>
+  const filterData = products
+    .filter((item) => item.data.type == url)
+    .map((item) => (
+      <Card
+        key={item.id}
+        title={item.data.name}
+        description={item.data.description}
+        price={item.data.price}
+        img={item.data.photos[0].photoUrl}
+        id={item.id}
+      />
+    ));
+
+  useEffect(() => {
+    if (url) {
+      getTitleFromUrl(url);
+    }
+    if (params.get('search')) {
+      dispatch(fetchSearchProducts(params.get('search')));
+      setTitle(`Поиск: ${params.get('search')}`);
+    } else {
+      dispatch(fetchGetProducts());
+    }
+    return () => {
+      setTitle('Все товары');
+    };
+  }, [pathname, params.get('search')]);
+
+  return (
+    <Layout>
+      <div className='content'>
+        <Container>
+          <div className='offers'>
+            <h5>{title}</h5>
+            {loading ? (
+              <div className='loaders'>
+                {Array(4)
+                  .fill(0)
+                  .map((_, idx) => (
+                    <Loader key={idx} />
+                  ))}
+              </div>
+            ) : url ? (
+              filterData.length != 0 ? (
+                <div className='offers__cards'>{filterData}</div>
+              ) : (
+                <div style={{ textAlign: 'center', fontSize: 24, fontWeight: 700, marginTop: 100 }}>
+                  Ничего не найдено!
                 </div>
-            </div>
-        </Layout>
-    )
-}
+              )
+            ) : data.length != 0 ? (
+              <div className='offers__cards'>{data}</div>
+            ) : (
+              <div style={{ textAlign: 'center', fontSize: 24, fontWeight: 700, marginTop: 100 }}>
+                Ничего не найдено!
+              </div>
+            )}
+          </div>
+        </Container>
+      </div>
+    </Layout>
+  );
+};
 
 export default OffersContainer;

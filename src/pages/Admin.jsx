@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Pagination } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import Search from '../components/Search';
 import Layout from '../layout/Layout';
 import AdminProductCart from '../components/AdminProducCard';
 import axios from 'axios';
 import AdminCreateProduct from '../components/AdminCreateProduct';
 import { useNavigate } from 'react-router-dom';
+import CustomPagination from '../components/Pagination';
 
 const Admin = () => {
   const navigate = useNavigate();
@@ -45,14 +46,13 @@ const Admin = () => {
     }
   };
 
-  const pushToAddProduct = () =>{
-    navigate('/admin/add')
-  }
+  const pushToAddProduct = () => {
+    navigate('/admin/add');
+  };
 
   useEffect(async () => {
     getProducts();
   }, [rerender]);
-  
 
   return (
     <Layout>
@@ -81,10 +81,12 @@ const Admin = () => {
                 </p>
               )}
             </div>
-            <Pagination />
+            <CustomPagination />
           </div>
-          <AdminCreateProduct rerender={rerender} setRerender={setRerender} mobile={false}/>
-          <div className='products__add' onClick={pushToAddProduct}>+</div>
+          <AdminCreateProduct rerender={rerender} setRerender={setRerender} mobile={false} />
+          <div className='products__add' onClick={pushToAddProduct}>
+            +
+          </div>
         </div>
       </Container>
     </Layout>

@@ -1,12 +1,21 @@
-import cls from './Pagination.module.css'
-import nextImg from '../assets/img/nextImg.jpg'
-import prevImg from '../assets/img/prevImg.jpg'
-import { useState } from 'react'
+import { Pagination } from 'react-bootstrap';
 
-function Pagination({}){
-    return(
-        <></>
-    )
+function CustomPagination({}) {
+  return (
+    <Pagination className='pagination'>
+      <Pagination.Prev />
+      <Pagination.Item>{1}</Pagination.Item>
+      <Pagination.Ellipsis />
+
+      <Pagination.Item>{11}</Pagination.Item>
+      <Pagination.Item active>{12}</Pagination.Item>
+      <Pagination.Item>{13}</Pagination.Item>
+
+      <Pagination.Ellipsis />
+      <Pagination.Item>{20}</Pagination.Item>
+      <Pagination.Next />
+    </Pagination>
+  );
 }
 
-export default Pagination
+export default CustomPagination;

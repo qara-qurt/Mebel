@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 const AdminProducCard = ({ id, data, deleteProduct }) => {
   const [show, setShow] = useState(false);
@@ -16,14 +17,18 @@ const AdminProducCard = ({ id, data, deleteProduct }) => {
     <>
       <div className='products__carts'>
         <div className='product__cart'>
-          <div className='cart__img'>
-            <img src={data.photos[0].photoUrl} alt='' />
-          </div>
-          <div className='cart__info'>
-            <div className='cart__name'>
-              <p>{data.name} -</p>
-              <p>{data.price} тг</p>
+          <Link to={`/item/${id}`}>
+            <div className='cart__img'>
+              <img src={data.photos[0].photoUrl} alt='' />
             </div>
+          </Link>
+          <div className='cart__info'>
+            <Link to={`/item/${id}`} style={{ color: 'inherit', textDecoration: 'none' }}>
+              <div className='cart__name'>
+                <p>{data.name} -</p>
+                <p>{data.price} тг</p>
+              </div>
+            </Link>
             <div className='cart__description'>
               <p>{data.description}</p>
             </div>

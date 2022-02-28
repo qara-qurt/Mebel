@@ -1,18 +1,9 @@
-import {
-  Button,
-  Container,
-  Dropdown,
-  Form,
-  Modal,
-  Nav,
-  Navbar,
-  NavDropdown,
-} from 'react-bootstrap';
+import { Container, Dropdown, Form, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import user from '../assets/img/user.png';
 import like from '../assets/img/heart.png';
 import basket from '../assets/img/shopping-basket.png';
 import Icon from '../assets/img/Icon.png';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { BurgerMenu } from '../components/BurgerMenu';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
@@ -28,7 +19,7 @@ export const Header = () => {
   const dispatch = useDispatch();
   const { isAuth, email } = useAuth();
   const navigate = useNavigate();
-
+  const [search, setSearch] = useState('');
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -37,6 +28,11 @@ export const Header = () => {
   const onLogOut = () => {
     dispatch(logOut());
     handleClose();
+  };
+
+  const onSearch = async (e) => {
+    e.preventDefault();
+    navigate(`/offers/?search=${search}`);
   };
 
   return (
@@ -50,36 +46,43 @@ export const Header = () => {
               </Link>
             </Navbar.Brand>
             <Nav className='menu'>
+              <Nav.Link onClick={() => navigate('/')}>Главная</Nav.Link>
               <NavDropdown title='Товары'>
-                <NavDropdown.Item>
-                  <Link to='/offers' className='sub-menu'>
-                    Все
-                  </Link>
+                <NavDropdown.Item onClick={() => navigate('/offers')}>Все</NavDropdown.Item>
+                <NavDropdown.Item onClick={() => navigate('/offers/cupboard')}>
+                  Шкафы
                 </NavDropdown.Item>
-                <NavDropdown.Item>
-                  <Link to='/offers/cupboards' className='sub-menu'>
-                    Шкафы
-                  </Link>
+                <NavDropdown.Item onClick={() => navigate('/offers/bed')}>Кровати</NavDropdown.Item>
+                <NavDropdown.Item onClick={() => navigate('/offers/couch')}>
+                  Диваны
                 </NavDropdown.Item>
-                <NavDropdown.Item>
-                  <Link to='/offers/beds' className='sub-menu'>
-                    Кровати
-                  </Link>
+                <NavDropdown.Item onClick={() => navigate('/offers/chair')}>
+                  Стулья
+                </NavDropdown.Item>
+                <NavDropdown.Item onClick={() => navigate('/offers/chest')}>
+                  Комоды
+                </NavDropdown.Item>
+                <NavDropdown.Item onClick={() => navigate('/offers/rack')}>
+                  Стеллажи
+                </NavDropdown.Item>
+                <NavDropdown.Item onClick={() => navigate('/offers/armchair')}>
+                  Кресла
+                </NavDropdown.Item>
+                <NavDropdown.Item onClick={() => navigate('/offers/table')}>Стол</NavDropdown.Item>
+                <NavDropdown.Item onClick={() => navigate('/offers/kid')}>
+                  Детская мебель
                 </NavDropdown.Item>
               </NavDropdown>
-              <NavDropdown title='Комнаты'>
-                <NavDropdown.Item>Гостинная</NavDropdown.Item>
-                <NavDropdown.Item>Спальня</NavDropdown.Item>
-                <NavDropdown.Item>Кухня</NavDropdown.Item>
-                <NavDropdown.Item>Детская</NavDropdown.Item>
-                <NavDropdown.Item>Рабочий кабинет</NavDropdown.Item>
-                <NavDropdown.Item>Прихожая</NavDropdown.Item>
-              </NavDropdown>
-              <Nav.Link>Услуги</Nav.Link>
-              <Nav.Link>Вдохновление</Nav.Link>
+              <Nav.Link>О нас</Nav.Link>
+              <Nav.Link>Контакты</Nav.Link>
             </Nav>
             <Form className='d-flex'>
-              <Search placeholder={'Что вы ищите?'} />
+              <Search
+                placeholder={'Что вы ищите?'}
+                value={search}
+                setValue={setSearch}
+                onSearch={onSearch}
+              />
             </Form>
             <div className='menu-adapt'>
               <div className='icons'>

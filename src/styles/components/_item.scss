@@ -97,7 +97,15 @@
     .unshow{
         display: none;
     }
-    }
+}
+
+.img-like{
+    cursor: pointer;
+}
+.img-like:active {
+    margin-top: 1px;
+    margin-bottom: -1px;
+}
 @media (max-width:1024px) {
     .item span{
         display: inline-block;

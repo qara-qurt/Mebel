@@ -1,0 +1,14 @@
+.offers{
+    margin: 20px 0px;
+    h5{
+        margin-bottom: 30px;
+        font-weight: 600;
+    }
+    &__cards{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+    .card{
+        margin: 5px 20px;
+    }
+}

@@ -29,12 +29,16 @@ function App() {
       <Routes>
         <Route path='/' element={<Main />} />
         <Route path='/offers' element={<OffersContainer />}>
-            <Route path='cupboards' element={<OffersContainer />}>
-                <Route path=":id" element={<OffersContainer />} />
-            </Route>
-            <Route path='beds' element={<OffersContainer />}>
-                <Route path=":id" element={<OffersContainer />} />
-            </Route>
+          <Route path='cupboard' element={<OffersContainer />} />  
+          <Route path='bed' element={<OffersContainer />} />  
+          <Route path='couch' element={<OffersContainer />} />  
+          <Route path='chair' element={<OffersContainer />} />  
+          <Route path='chest' element={<OffersContainer />} />  
+          <Route path='rack' element={<OffersContainer />} />  
+          <Route path='armchair' element={<OffersContainer />} />  
+          <Route path='kid' element={<OffersContainer />} />  
+          <Route path='table' element={<OffersContainer />} /> 
+          <Route path='search' element={<OffersContainer />} /> 
         </Route>
         <Route path="/item" element={<ItemContainer />}>
           <Route path=":productId" element={<OffersContainer />} />

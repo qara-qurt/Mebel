@@ -25,7 +25,6 @@ const addToLocalStorage = (state) => {
     localStorage.setItem("cart",JSON.stringify(state))
 }
 
-
 export const cartSlice = createSlice({
   name: 'cart',
   initialState,

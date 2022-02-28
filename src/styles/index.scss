@@ -40,7 +40,7 @@ input{
 .card{
     border: none!important;
     cursor: pointer;
-    width: 280px;
+    width: 250px;
     a{
         text-decoration: none;
         color: $black;
@@ -63,9 +63,11 @@ input{
         }
     }
     &__img{
-        min-height:264px;
+        height:264px;
+        margin-bottom: 10px;
         img{
-            width: 90%;
+            height:264px;
+            width: 100%;
         }
     }
 }
@@ -111,6 +113,16 @@ input{
 .link{
     color: rgba(17, 17, 17, 0.55);
     text-decoration: none;
+}
+
+.pagination{
+    display: flex;
+    justify-content: center;
+}
+
+.loaders{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
 @media (min-width: 1920px){

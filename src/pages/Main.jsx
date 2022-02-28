@@ -11,27 +11,27 @@ import { IdeaBlock } from '../components/IdeaBlock';
 import Layout from '../layout/Layout';
 import { useSelector } from 'react-redux';
 
-const Main = ()=> {
-    const dispatch = useDispatch();
-    const {products} = useSelector(state=>state.products)
+const Main = () => {
+  const dispatch = useDispatch();
+  const { products } = useSelector((state) => state.products);
 
-    useEffect(()=>{
-        dispatch(fetchGetProducts())
-    },[dispatch])
+  useEffect(() => {
+    dispatch(fetchGetProducts());
+  }, [dispatch]);
 
-    return (
-      <Layout>
-        <div className="bg">
-          <Container>
-              <MainBanner />
-              <RecBlock data={products} />
-              <NewBlock data={products}/>
-              <PopCategory data={products} />
-              <IdeaBlock />
-          </Container>
-        </div>
-      </Layout>
+  return (
+    <Layout>
+      <div className='bg'>
+        <Container>
+          <MainBanner />
+          <RecBlock data={products} />
+          <NewBlock data={products} />
+          <PopCategory data={products} />
+          <IdeaBlock />
+        </Container>
+      </div>
+    </Layout>
   );
-}
+};
 
 export default Main;
