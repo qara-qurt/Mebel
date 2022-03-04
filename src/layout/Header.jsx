@@ -73,8 +73,7 @@ export const Header = () => {
                   Детская мебель
                 </NavDropdown.Item>
               </NavDropdown>
-              <Nav.Link>О нас</Nav.Link>
-              <Nav.Link>Контакты</Nav.Link>
+              <Nav.Link onClick={() => navigate('/about-us')}>О нас</Nav.Link>
             </Nav>
             <Form className='d-flex'>
               <Search

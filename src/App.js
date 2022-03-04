@@ -4,7 +4,7 @@ import { Route, Routes } from 'react-router';
 import Main from './pages/Main/Main';
 import Admin from './pages/Admin/Admin';
 import Error from './pages/Error/Error';
-import OffersContainer from './pages/Offers/OffersContainer';
+import AboutUs from './pages/AboutUs/AboutUs';
 import CartContainer from './pages/Cart/CartContainer';
 import ItemContainer from './pages/Item/ItemContainer';
 import Login from './pages/Login/Login';
@@ -15,6 +15,7 @@ import Register from './pages/Register/Register';
 import SendMessageToEmail from './pages/ResetPassword/SendMessageToEmail';
 import AdminCreateProduct from './components/AdminCreateProduct';
 import Likes from './pages/Likes/Likes';
+import Offers from './pages/Offers/Offers';
 
 function App() {
   const {isAuth} = useAuth();
@@ -28,22 +29,23 @@ function App() {
     <>
       <Routes>
         <Route path='/' element={<Main />} />
-        <Route path='/offers' element={<OffersContainer />}>
-          <Route path='cupboard' element={<OffersContainer />} />  
-          <Route path='bed' element={<OffersContainer />} />  
-          <Route path='couch' element={<OffersContainer />} />  
-          <Route path='chair' element={<OffersContainer />} />  
-          <Route path='chest' element={<OffersContainer />} />  
-          <Route path='rack' element={<OffersContainer />} />  
-          <Route path='armchair' element={<OffersContainer />} />  
-          <Route path='kid' element={<OffersContainer />} />  
-          <Route path='table' element={<OffersContainer />} /> 
-          <Route path='search' element={<OffersContainer />} /> 
+        <Route path='/offers' element={<Offers />}>
+          <Route path='cupboard' element={<Offers />} />  
+          <Route path='bed' element={<Offers />} />  
+          <Route path='couch' element={<Offers />} />  
+          <Route path='chair' element={<Offers />} />  
+          <Route path='chest' element={<Offers />} />  
+          <Route path='rack' element={<Offers />} />  
+          <Route path='armchair' element={<Offers />} />  
+          <Route path='kid' element={<Offers />} />  
+          <Route path='table' element={<Offers />} /> 
+          <Route path='search' element={<Offers />} /> 
         </Route>
         <Route path="/item" element={<ItemContainer />}>
-          <Route path=":productId" element={<OffersContainer />} />
+          <Route path=":productId" element={<Offers />} />
         </Route>
         <Route path='/cart' element={<CartContainer />} />
+        <Route path='/about-us' element={<AboutUs />} />
         <Route path='/likes' element={<Likes />} />
         <Route path='/admin' element={<Admin />} />
         <Route path='/admin/add' element={<AdminCreateProduct mobile={true}/>} />

@@ -1,46 +1,50 @@
-import { Col, Row } from "react-bootstrap"
-import { useSelector } from "react-redux"
-import CardBasket from "../../components/CardBasket"
-import useAuth from "../../hooks/useAuth"
+import { Col, Row } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
+import CardBasket from '../../components/CardBasket';
+import useAuth from '../../hooks/useAuth';
 
-const Cart = ({cart,allPrice,onDeleCartItem,onPlusCart,onMinusCart}) => {
-    const {isAuth} = useAuth()
-    const {money} = useSelector(state=>state.auth)
-    const onBuy = () =>{
-        if(isAuth){
-            if(money>=allPrice){
-                alert("Покупка успешно завершена!")
-            }
-        }else{
-            alert("Вам нужно авторизоваться!")
-        }
+const Cart = ({ cart, allPrice, onDeleCartItem, onPlusCart, onMinusCart }) => {
+  const { isAuth } = useAuth();
+  const { money } = useSelector((state) => state.auth);
+  const onBuy = () => {
+    if (isAuth) {
+      if (money >= allPrice) {
+        alert('Покупка успешно завершена!');
+      }
+    } else {
+      alert('Вам нужно авторизоваться!');
     }
-    return(
-        <Row>
-            <h4 style={{fontWeight:500,marginTop:20}}>Корзина</h4>
-            <Col lg={8}>
-                {cart.map(item=>{
-                    return(
-                        <CardBasket 
-                        key={item.id}
-                        item={item}
-                        onDeletItem={onDeleCartItem} 
-                        plusCart={onPlusCart} 
-                        minusCart={onMinusCart}/>
-                    )
-                })}
-            </Col>
-            <Col lg={4}>
-                <div className="all-price">
-                    <h5 className='all-price__title'>Сумма заказа</h5>
-                    <div className='all-price__price'>
-                        <h5>Общая суммка заказа:</h5><h5>{allPrice}</h5>
-                    </div>
-                    <div className='all-price__button' onClick={onBuy}>Купть/Заказать</div>
-                    </div>
-            </Col>
-        </Row>
-    )
-}
+  };
+  return (
+    <Row>
+      <h4 style={{ fontWeight: 500, marginTop: 20 }}>Корзина</h4>
+      <Col lg={8}>
+        {cart.map((item) => {
+          return (
+            <CardBasket
+              key={item.id}
+              item={item}
+              onDeletItem={onDeleCartItem}
+              plusCart={onPlusCart}
+              minusCart={onMinusCart}
+            />
+          );
+        })}
+      </Col>
+      <Col lg={4}>
+        <div className='all-price'>
+          <h5 className='all-price__title'>Сумма заказа</h5>
+          <div className='all-price__price'>
+            <h5>Общая суммка заказа:</h5>
+            <h5>{allPrice}</h5>
+          </div>
+          <div className='all-price__button' onClick={onBuy}>
+            Купить/Заказать
+          </div>
+        </div>
+      </Col>
+    </Row>
+  );
+};
 
-export default Cart
+export default Cart;

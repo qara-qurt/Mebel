@@ -1,0 +1,71 @@
+.about-us {
+    &__banner {
+        margin-top: -10px;
+        background-color: $orange;
+        text-align: center;
+        padding: 30px 0px 20px 0px;
+        color: #fff;
+        h1{
+            font-family: 'Knewave',
+            cursive;
+            margin-bottom: 30px;
+            font-size: 50px;
+            letter-spacing: 2px;
+        }
+    }
+
+    // .about-us__carts
+
+    &__carts {
+        display: flex;
+        margin-top: 50px;
+    }
+
+    // .about-us__cart
+
+    &__cart {
+        flex: 1 0 0;
+        margin: 0px 10px;
+        h5{
+            font-weight: 700;
+        }
+        p{
+            span{
+                color: $orange;
+            }
+        }
+    }
+
+    // .about-us__author
+
+    &__author {
+        margin-top: 50px;
+        display: flex;
+        align-items: center;
+        img{
+            margin-bottom: 10px;
+        }
+        margin-bottom: 20px;
+    }
+}
+
+.author {
+    &__info {
+        margin-left: 20px;
+        span{
+            color:$orange;
+        }
+    }
+}
+
+@media (max-width:768px){
+    .about-us__carts{
+        flex-direction: column;
+    }
+}
+
+@media (max-width:375px) {
+    .about-us__author {
+        flex-direction: column;
+    }
+}

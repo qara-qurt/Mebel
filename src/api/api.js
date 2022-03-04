@@ -65,5 +65,27 @@ export const productsApi = {
         } catch (e) {
             throw Error(e);
         }
+    },
+
+    async searchProduct(search) {
+        const url = 'https://mebel-f0c71-default-rtdb.europe-west1.firebasedatabase.app/products.json';
+        try {
+            const response = await axios.get(url)
+            if (response.status == '200') {
+                return Object.keys(response.data)
+                    .map((product) => ({
+                        id: product,
+                        data: response.data[product],
+                    }))
+                    .filter((item) => {
+                        return (
+                            item.data.name.includes(search[0].toUpperCase() + search.slice(1)) ||
+                            item.data.description.includes(search[0].toUpperCase() + search.slice(1))
+                        );
+                    });
+            }
+        } catch (error) {
+            throw Error(error);
+        }
     }
 }

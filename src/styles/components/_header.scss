@@ -10,6 +10,7 @@
     margin: 0px 10px;
 }
 .header{
+
     &__icon{
         cursor: pointer;
         width: 50px;
@@ -18,7 +19,7 @@
         margin-left: 10px;
         background-color: $gray;
         border-radius: 50em;
-        width: 700px;
+        width: 900px;
         input{
             height: 40px;
             border-radius: 50em;
@@ -82,6 +83,7 @@
 .burger{
     padding-right: 10px;
     display: none;
+    z-index: 1000;
 }
 
 .cart-count{
@@ -174,6 +176,12 @@
 .showed{
     position: fixed;
     transform: translateX(0)!important;
+}
+
+@media (max-width:1920px) {
+    .header__search {
+        width: 700px;
+    }
 }
 
 @media (max-width:1440px){

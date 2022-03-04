@@ -69,9 +69,9 @@ export const PopCategory = () => {
         slidesPerView={4}
         spaceBetween={20}
         className='swiper'>
-        {typeOfProducts.map((item) => {
+        {typeOfProducts.map((item, idx) => {
           return (
-            <SwiperSlide key={item.id}>
+            <SwiperSlide key={idx}>
               <div className='pop-card__item'>
                 <img src={item.img} alt='' />
                 <Link to={item.link}>{item.name}</Link>

@@ -8,11 +8,13 @@ import axios from 'axios';
 import AdminCreateProduct from '../../components/AdminCreateProduct';
 import { useNavigate } from 'react-router-dom';
 import CustomPagination from '../../components/Pagination';
+import { useSelector } from 'react-redux';
 
 const Admin = () => {
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const [rerender, setRerender] = useState(false);
+  const [value, setValue] = useState('');
 
   const deleteProduct = async (id) => {
     const response = await productsApi.deleteProducts(id);
@@ -30,6 +32,16 @@ const Admin = () => {
     navigate('/admin/add');
   };
 
+  const onSearch = async (e) => {
+    e.preventDefault();
+    if (value != '') {
+      const data = await productsApi.searchProduct(value);
+      setProducts(data);
+    } else {
+      getProducts();
+    }
+  };
+
   useEffect(async () => {
     getProducts();
   }, [rerender]);
@@ -42,7 +54,13 @@ const Admin = () => {
             <div className='products__header'>
               <h5>Товары: 100</h5>
               <div className='products__search'>
-                <Search placeholder={'Поиск'} maxWidth={300} />
+                <Search
+                  placeholder={'Поиск'}
+                  maxWidth={300}
+                  value={value}
+                  setValue={setValue}
+                  onSearch={onSearch}
+                />
               </div>
             </div>
             <div className='products__carts'>

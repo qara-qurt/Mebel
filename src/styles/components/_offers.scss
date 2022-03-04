@@ -5,10 +5,37 @@
         font-weight: 600;
     }
     &__cards{
+        justify-items: center;
+        position: relative;
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-auto-rows: 350px;
+        column-gap: 33px;
+        row-gap: 42px;
+        margin-bottom: 50px;
     }
     .card{
         margin: 5px 20px;
+    }
+}
+
+@media (max-width:1420px) {
+    .offers__cards {
+        grid-template-columns: minmax(255px, auto) minmax(255px, auto) minmax(255px, auto);
+        grid-auto-rows: 350px;
+    }
+}
+
+@media (max-width:990px) {
+    .offers__cards {
+        grid-template-columns: minmax(255px, auto) minmax(255px, auto);
+        grid-auto-rows: 350px
+    }
+}
+
+@media (max-width:600px) {
+    .offers__cards {
+        grid-template-columns: minmax(255px, auto);
+        grid-auto-rows: 350px;
     }
 }
