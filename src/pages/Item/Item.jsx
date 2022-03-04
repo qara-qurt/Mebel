@@ -4,8 +4,6 @@ import like from '../../assets/img/heart.png';
 import { useState } from 'react';
 
 const Item = ({ currentProduct, onSetToCart, onSetToLike }) => {
-  const [visible, setVisible] = useState(false);
-
   return (
     <Row className='item__body'>
       <Col md={7} className='item__imges'>
@@ -54,35 +52,7 @@ const Item = ({ currentProduct, onSetToCart, onSetToLike }) => {
         </div>
         <div className='item__matelials'>
           <h4>Материалы и уход:</h4>
-          <p>
-            {currentProduct.material}
-            <span
-              className={visible ? 'unshow' : ''}
-              onClick={() => {
-                setVisible(true);
-              }}>
-              ...
-            </span>
-          </p>
-          {visible && (
-            <div className={visible ? '' : 'full'}>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur libero animi quas
-                impedit natus doloremque! Itaque voluptatibus, repellendus sunt ipsam doloribus eos
-                deserunt aliquid! Sequi ipsa ea inventore itaque odit.
-              </p>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur libero animi quas
-                impedit natus doloremque! Itaque voluptatibus, repellendus sunt ipsam doloribus eos
-                deserunt aliquid! Sequi ipsa ea inventore itaque odit.
-              </p>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur libero animi quas
-                impedit natus doloremque! Itaque voluptatibus, repellendus sunt ipsam doloribus eos
-                deserunt aliquid! Sequi ipsa ea inventore itaque odit.
-              </p>
-            </div>
-          )}
+          <p>{currentProduct.material}</p>
         </div>
       </Col>
     </Row>

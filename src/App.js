@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import "./styles/index.scss"
 import { Route, Routes } from 'react-router';
-import Main from './pages/Main';
-import Admin from './pages/Admin';
-import Error from './pages/Error';
+import Main from './pages/Main/Main';
+import Admin from './pages/Admin/Admin';
+import Error from './pages/Error/Error';
 import OffersContainer from './pages/Offers/OffersContainer';
 import CartContainer from './pages/Cart/CartContainer';
 import ItemContainer from './pages/Item/ItemContainer';

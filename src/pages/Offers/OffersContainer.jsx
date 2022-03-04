@@ -5,8 +5,16 @@ import { useDispatch } from 'react-redux';
 import { useLocation, useParams, useSearchParams } from 'react-router-dom';
 import Card from '../../components/Card';
 import Loader from '../../components/Loader';
+import SortPopup from '../../components/SortPopup';
 import Layout from '../../layout/Layout';
-import { fetchGetProducts, fetchSearchProducts } from '../../store/reducers/products';
+import { fetchGetProducts, fetchSearchProducts, sortProducts } from '../../store/reducers/products';
+
+const sort = [
+  { name: 'популярности', type: 'popular' },
+  { name: 'цене', type: 'price' },
+  { name: 'алфавиту', type: 'name' },
+  { name: 'новизне', type: 'new' },
+];
 
 const OffersContainer = () => {
   const { pathname } = useLocation();
@@ -48,7 +56,7 @@ const OffersContainer = () => {
     }
   };
 
-  const data = products.map((item) => (
+  let data = products.map((item) => (
     <Card
       key={item.id}
       title={item.data.name}
@@ -72,6 +80,7 @@ const OffersContainer = () => {
       />
     ));
 
+  //Tilte Страницы
   useEffect(() => {
     if (url) {
       getTitleFromUrl(url);
@@ -87,12 +96,21 @@ const OffersContainer = () => {
     };
   }, [pathname, params.get('search')]);
 
+  //Сортировка
+  const onSelectSortType = React.useCallback(
+    (type) => {
+      dispatch(sortProducts(type));
+    },
+    [dispatch],
+  );
+
   return (
     <Layout>
       <div className='content'>
         <Container>
           <div className='offers'>
             <h5>{title}</h5>
+            <SortPopup items={sort} onSelectSortType={onSelectSortType} />
             {loading ? (
               <div className='loaders'>
                 {Array(4)

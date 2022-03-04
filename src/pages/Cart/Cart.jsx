@@ -1,7 +1,20 @@
 import { Col, Row } from "react-bootstrap"
+import { useSelector } from "react-redux"
 import CardBasket from "../../components/CardBasket"
+import useAuth from "../../hooks/useAuth"
 
 const Cart = ({cart,allPrice,onDeleCartItem,onPlusCart,onMinusCart}) => {
+    const {isAuth} = useAuth()
+    const {money} = useSelector(state=>state.auth)
+    const onBuy = () =>{
+        if(isAuth){
+            if(money>=allPrice){
+                alert("Покупка успешно завершена!")
+            }
+        }else{
+            alert("Вам нужно авторизоваться!")
+        }
+    }
     return(
         <Row>
             <h4 style={{fontWeight:500,marginTop:20}}>Корзина</h4>
@@ -23,7 +36,7 @@ const Cart = ({cart,allPrice,onDeleCartItem,onPlusCart,onMinusCart}) => {
                     <div className='all-price__price'>
                         <h5>Общая суммка заказа:</h5><h5>{allPrice}</h5>
                     </div>
-                    <div className='all-price__button'>Купть/Заказать</div>
+                    <div className='all-price__button' onClick={onBuy}>Купть/Заказать</div>
                     </div>
             </Col>
         </Row>

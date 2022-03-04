@@ -40,7 +40,7 @@ input{
 .card{
     border: none!important;
     cursor: pointer;
-    width: 250px;
+    width: 280px;
     a{
         text-decoration: none;
         color: $black;
@@ -85,21 +85,27 @@ input{
     display: flex;
     justify-content: center;
     &__item{
+        width: 377px;
+        height: 500px;
         position: relative;
         overflow: hidden;
         a{ 
+            position: absolute;
+            bottom: 50px;
+            left: 28%;
             text-decoration: none;
             color: $black;
-            position:  absolute;
-            left:calc(50%-65px);
             bottom: 50px;
             border: none;
             border-radius: 40px;
             background-color: #fff;
             text-align: center;
+            font-weight: 500;
             padding: 10px 50px;
             font-size: 18px;
-            font-weight: 600;
+        }
+        img{
+            object-fit: cover;
         }
     }
     div{
@@ -131,14 +137,3 @@ input{
     }
 }
 
-@media (max-width:768px) {
-    .pop-card__item{
-        a{
-            padding: 8px 35px;
-            font-size: 16px;
-        }
-        img{
-            width: 80%;
-        }
-    }
-}

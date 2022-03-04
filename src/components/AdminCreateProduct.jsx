@@ -3,11 +3,11 @@ import { Spinner } from 'react-bootstrap';
 import Input from '../components/Input';
 import LoginButton from '../components/LoginButton';
 import backblack from '../assets/img/backblack.png';
-import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { fetchCreateProduct, setLoading } from '../store/reducers/products';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { productsApi } from '../api/api';
 
 const AdminCreateProduct = ({ rerender, setRerender, mobile }) => {
   const navigate = useNavigate();
@@ -77,82 +77,38 @@ const AdminCreateProduct = ({ rerender, setRerender, mobile }) => {
   }, [name, description, price, width, height, depth, colors, material, photos]);
 
   const uploadData = async () => {
-    const formData1 = new FormData();
-    formData1.append('file', photos[0]);
-    formData1.append('upload_preset', 'f1vguzfd');
+    dispatch(setLoading(true));
+    const response = await productsApi.createProduct(photos);
+    const data = {
+      name: name,
+      description: description,
+      price: Number(price.replace(' ', '')),
+      size: [width, height, depth],
+      colors: colors,
+      material: material,
+      type: selectedOption,
+      date: new Date().toISOString().split('T')[0],
+      views: 0,
+      photos: response,
+    };
+    console.log(data);
+    dispatch(fetchCreateProduct(data));
+    dispatch(setLoading(false));
+    alert('Товар создан!');
+    cleanAllInputs();
+  };
 
-    const formData2 = new FormData();
-    formData2.append('file', photos[1]);
-    formData2.append('upload_preset', 'f1vguzfd');
-
-    const formData3 = new FormData();
-    formData3.append('file', photos[2]);
-    formData3.append('upload_preset', 'f1vguzfd');
-
-    const formData4 = new FormData();
-    formData4.append('file', photos[3]);
-    formData4.append('upload_preset', 'f1vguzfd');
-
-    try {
-      dispatch(setLoading(true));
-      axios
-        .post('https://api.cloudinary.com/v1_1/mebelproject/image/upload', formData1)
-        .then((res) => {
-          const photoUrl1 = res.data.secure_url;
-          const publicId1 = res.data.public_id;
-          axios
-            .post('https://api.cloudinary.com/v1_1/mebelproject/image/upload', formData2)
-            .then((res) => {
-              const photoUrl2 = res.data.secure_url;
-              const publicId2 = res.data.public_id;
-              axios
-                .post('https://api.cloudinary.com/v1_1/mebelproject/image/upload', formData3)
-                .then((res) => {
-                  const photoUrl3 = res.data.secure_url;
-                  const publicId3 = res.data.public_id;
-                  axios
-                    .post('https://api.cloudinary.com/v1_1/mebelproject/image/upload', formData4)
-                    .then((res) => {
-                      const photoUrl4 = res.data.secure_url;
-                      const publicId4 = res.data.public_id;
-                      const data = {
-                        name: name,
-                        description: description,
-                        price: Number(price.replace(' ', '')),
-                        size: [width, height, depth],
-                        colors: colors,
-                        material: material,
-                        type: selectedOption,
-                        date: new Date().toISOString().split('T')[0],
-                        views: 0,
-                        photos: [
-                          { photoUrl: photoUrl1, publicId: publicId1 },
-                          { photoUrl: photoUrl2, publicId: publicId2 },
-                          { photoUrl: photoUrl3, publicId: publicId3 },
-                          { photoUrl: photoUrl4, publicId: publicId4 },
-                        ],
-                      };
-                      dispatch(fetchCreateProduct(data));
-                      dispatch(setLoading(false));
-                      alert('Товар создан!');
-                      setName('');
-                      setDescription('');
-                      setPrice('');
-                      setWidth('');
-                      setHeight('');
-                      setDepth('');
-                      setColors('');
-                      setMaterial('');
-                      setSelectedOption('');
-                      setPhotos([]);
-                      setRerender(!rerender);
-                    });
-                });
-            });
-        });
-    } catch (e) {
-      throw Error(e);
-    }
+  const cleanAllInputs = () => {
+    setName('');
+    setDescription('');
+    setPrice('');
+    setWidth('');
+    setHeight('');
+    setDepth('');
+    setColors('');
+    setMaterial('');
+    setSelectedOption('');
+    setRerender(!rerender);
   };
 
   const onSubmit = () => {
@@ -239,7 +195,7 @@ const AdminCreateProduct = ({ rerender, setRerender, mobile }) => {
                 checked={selectedOption === 'bed'}
                 onChange={chekedHandler}
               />
-              <label for='choice1'>Кровать</label>
+              <label htmlFor='choice1'>Кровать</label>
             </div>
             <div>
               <input
@@ -250,7 +206,7 @@ const AdminCreateProduct = ({ rerender, setRerender, mobile }) => {
                 checked={selectedOption === 'couch'}
                 onChange={chekedHandler}
               />
-              <label for='choice2'>Диван</label>
+              <label htmlFor='choice2'>Диван</label>
             </div>
             <div>
               <input
@@ -261,7 +217,7 @@ const AdminCreateProduct = ({ rerender, setRerender, mobile }) => {
                 checked={selectedOption === 'chair'}
                 onChange={chekedHandler}
               />
-              <label for='choice2'>Стул</label>
+              <label htmlFor='choice2'>Стул</label>
             </div>
             <div>
               <input
@@ -272,7 +228,7 @@ const AdminCreateProduct = ({ rerender, setRerender, mobile }) => {
                 checked={selectedOption === 'cupboard'}
                 onChange={chekedHandler}
               />
-              <label for='choice4'>Шкаф</label>
+              <label htmlFor='choice4'>Шкаф</label>
             </div>
             <div>
               <input
@@ -283,7 +239,7 @@ const AdminCreateProduct = ({ rerender, setRerender, mobile }) => {
                 checked={selectedOption === 'table'}
                 onChange={chekedHandler}
               />
-              <label for='choice9'>Стол</label>
+              <label htmlFor='choice9'>Стол</label>
             </div>
             <div>
               <input
@@ -294,7 +250,7 @@ const AdminCreateProduct = ({ rerender, setRerender, mobile }) => {
                 checked={selectedOption === 'chest'}
                 onChange={chekedHandler}
               />
-              <label for='choice5'>Комод</label>
+              <label htmlFor='choice5'>Комод</label>
             </div>
             <div>
               <input
@@ -305,7 +261,7 @@ const AdminCreateProduct = ({ rerender, setRerender, mobile }) => {
                 checked={selectedOption === 'rack'}
                 onChange={chekedHandler}
               />
-              <label for='choice6'>Стеллаж</label>
+              <label htmlFor='choice6'>Стеллаж</label>
             </div>
             <div>
               <input
@@ -316,7 +272,7 @@ const AdminCreateProduct = ({ rerender, setRerender, mobile }) => {
                 checked={selectedOption === 'armchair'}
                 onChange={chekedHandler}
               />
-              <label for='choice7'>Кресло</label>
+              <label htmlFor='choice7'>Кресло</label>
             </div>
             <div>
               <input
@@ -327,7 +283,7 @@ const AdminCreateProduct = ({ rerender, setRerender, mobile }) => {
                 checked={selectedOption === 'kid'}
                 onChange={chekedHandler}
               />
-              <label for='choice8'>Детская мебель</label>
+              <label htmlFor='choice8'>Детская мебель</label>
             </div>
           </div>
           <div className='create__inputs'>

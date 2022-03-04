@@ -17,7 +17,7 @@ export const Header = () => {
   const { count } = useSelector((state) => state.cart);
   const { likesCount } = useSelector((state) => state.like);
   const dispatch = useDispatch();
-  const { isAuth, email } = useAuth();
+  const { isAuth, email, money } = useAuth();
   const navigate = useNavigate();
   const [search, setSearch] = useState('');
   const [show, setShow] = useState(false);
@@ -68,7 +68,7 @@ export const Header = () => {
                 <NavDropdown.Item onClick={() => navigate('/offers/armchair')}>
                   Кресла
                 </NavDropdown.Item>
-                <NavDropdown.Item onClick={() => navigate('/offers/table')}>Стол</NavDropdown.Item>
+                <NavDropdown.Item onClick={() => navigate('/offers/table')}>Столы</NavDropdown.Item>
                 <NavDropdown.Item onClick={() => navigate('/offers/kid')}>
                   Детская мебель
                 </NavDropdown.Item>
@@ -92,7 +92,7 @@ export const Header = () => {
                   {isAuth ? (
                     <>
                       <Dropdown.ItemText>{email}</Dropdown.ItemText>
-                      <Dropdown.ItemText>Money: 10 000$</Dropdown.ItemText>
+                      <Dropdown.ItemText>Money: {money} тг</Dropdown.ItemText>
                       <NavDropdown.Item>
                         <div onClick={() => navigate('/admin')}>Панель админа</div>
                       </NavDropdown.Item>

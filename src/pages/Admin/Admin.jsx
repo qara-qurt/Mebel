@@ -1,49 +1,29 @@
 import React, { useEffect, useState } from 'react';
+import { productsApi } from '../../api/api';
 import { Container } from 'react-bootstrap';
-import Search from '../components/Search';
-import Layout from '../layout/Layout';
-import AdminProductCart from '../components/AdminProducCard';
+import Search from '../../components/Search';
+import Layout from '../../layout/Layout';
+import AdminProductCart from '../../components/AdminProducCard';
 import axios from 'axios';
-import AdminCreateProduct from '../components/AdminCreateProduct';
+import AdminCreateProduct from '../../components/AdminCreateProduct';
 import { useNavigate } from 'react-router-dom';
-import CustomPagination from '../components/Pagination';
+import CustomPagination from '../../components/Pagination';
 
 const Admin = () => {
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const [rerender, setRerender] = useState(false);
 
-  const deleteProduct = async (id, photos) => {
-    const url = `https://mebel-f0c71-default-rtdb.europe-west1.firebasedatabase.app/products/${id}.json`;
-    try {
-      const response = await axios.delete(url);
-      if (response.status == '200') {
-        // deleteImgFromCloud(photos)
-        getProducts();
-      }
-    } catch (error) {
-      console.log(error);
+  const deleteProduct = async (id) => {
+    const response = await productsApi.deleteProducts(id);
+    if (response === '200') {
+      getProducts();
     }
-    getProducts();
   };
 
   const getProducts = async () => {
-    const url = 'https://mebel-f0c71-default-rtdb.europe-west1.firebasedatabase.app/products.json';
-    try {
-      const response = await axios.get(url);
-      if (response.status === 200) {
-        if (response.data) {
-          const data = Object.keys(response.data).map((product) => {
-            return { id: product, data: response.data[product] };
-          });
-          setProducts(data);
-        } else {
-          setProducts([]);
-        }
-      }
-    } catch (error) {
-      console.log(error);
-    }
+    const data = await productsApi.getProducts();
+    setProducts(data);
   };
 
   const pushToAddProduct = () => {

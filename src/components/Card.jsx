@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import like from '../assets/img/heart.png';
 import basket from '../assets/img/shopping-basket.png';
 import { setCart } from '../store/reducers/cart';
 import { useAlert } from 'react-alert';
-import { addLike } from '../store/reducers/like';
+import { addLike, fetchAddLike } from '../store/reducers/like';
 
 const Card = ({ title, description, price, img, id }) => {
   const dispatch = useDispatch();
@@ -25,7 +25,7 @@ const Card = ({ title, description, price, img, id }) => {
 
   const onSetToLike = () => {
     alert.show('Добавлено в избранные!');
-    dispatch(addLike(data));
+    dispatch(fetchAddLike(data));
   };
 
   return (

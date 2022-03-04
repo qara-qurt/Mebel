@@ -1,14 +1,13 @@
 import React, { useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import { fetchGetProducts } from '../store/reducers/products';
-import { data } from '../data';
-import { MainBanner } from '../components/MainBanner';
-import { RecBlock } from '../components/RecBlock';
-import { PopCategory } from '../components/PopCategory';
-import { NewBlock } from '../components/NewBlock';
-import { IdeaBlock } from '../components/IdeaBlock';
-import Layout from '../layout/Layout';
+import { fetchGetProducts } from '../../store/reducers/products';
+import { MainBanner } from '../../components/MainBanner';
+import { RecBlock } from '../../components/RecBlock';
+import { PopCategory } from '../../components/PopCategory';
+import { NewBlock } from '../../components/NewBlock';
+import { IdeaBlock } from '../../components/IdeaBlock';
+import Layout from '../../layout/Layout';
 import { useSelector } from 'react-redux';
 
 const Main = () => {
@@ -17,7 +16,7 @@ const Main = () => {
 
   useEffect(() => {
     dispatch(fetchGetProducts());
-  }, [dispatch]);
+  }, []);
 
   return (
     <Layout>

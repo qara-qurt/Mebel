@@ -1,12 +1,12 @@
-import { createSlice } from '@reduxjs/toolkit'
-
-
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import axios from 'axios';
 
 const initialState = localStorage.getItem("cart") == null ? {
     cart:[],
     count:0,
-    allPrice:0
+    allPrice: 0,
 }:JSON.parse(localStorage.getItem('cart'))
+
 
 const deleteItem = (state,id) => {
     return state.cart = state.cart.filter((item)=>{
@@ -24,6 +24,7 @@ const getItemCount = (state,id) => {
 const addToLocalStorage = (state) => {
     localStorage.setItem("cart",JSON.stringify(state))
 }
+
 
 export const cartSlice = createSlice({
   name: 'cart',
@@ -101,9 +102,8 @@ export const cartSlice = createSlice({
             }
         })
         addToLocalStorage(state)
-    },
-    
-  },
+   },  
+  }
 })
 
 export const { setCart,deleteCart,plusCart,minusCart } = cartSlice.actions

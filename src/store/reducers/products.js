@@ -79,6 +79,18 @@ export const productSlice = createSlice({
   reducers: {
     setLoading:(state,action)=>{
       state.loading = action.payload
+    },
+    sortProducts: (state, action) => {
+      if (action.payload === 'popular') {
+        state.products = state.products.sort((a, b) => b.data.views - a.data.views)
+      } else if (action.payload === 'price') {
+        state.products = state.products.sort((a, b) => a.data.price - b.data.price)
+      } else if (action.payload === 'name') {
+        state.products = state.products.sort((a, b) => b.data.title - a.data.title)
+      }else if (action.payload === 'new') {        
+        state.products = state.products.sort((a, b) => Number(b.data.date.split("-").join("")) - Number(a.data.date.split("-").join("")))
+        
+      }
     }
   },
   extraReducers:{
@@ -109,6 +121,6 @@ export const productSlice = createSlice({
   }
 })
 
-export const { setProducts,setLoading } = productSlice.actions
+export const { setLoading,sortProducts } = productSlice.actions
 
 export default productSlice.reducer

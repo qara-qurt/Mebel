@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Container } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { EmptyCard } from '../../components/EmptyCard';
 import Layout from '../../layout/Layout';
-import { deleteCart, plusCart, minusCart } from '../../store/reducers/cart';
+import { deleteCart, plusCart, minusCart, fetchDeleteCart } from '../../store/reducers/cart';
 import Cart from './Cart';
 
 const CartContainer = ({}) => {
