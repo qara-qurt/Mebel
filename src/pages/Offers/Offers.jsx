@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { useLocation, useParams, useSearchParams } from 'react-router-dom';
 import Card from '../../components/Card';
 import Loader from '../../components/Loader';
+import CustomPagination from '../../components/Pagination';
 import SortPopup from '../../components/SortPopup';
 import Layout from '../../layout/Layout';
 import { fetchGetProducts, fetchSearchProducts, sortProducts } from '../../store/reducers/products';
@@ -23,6 +24,12 @@ const Offers = () => {
   const { products, loading } = useSelector((state) => state.products);
   const [title, setTitle] = useState('Все товары');
   let url = pathname.split('/')[2];
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const perPage = 8;
+  const lastProductIndex = currentPage * perPage;
+  const fisrtProductIndex = lastProductIndex - perPage;
+  const currentProducts = products.slice(fisrtProductIndex, lastProductIndex);
 
   const getTitleFromUrl = (url) => {
     switch (url) {
@@ -56,7 +63,7 @@ const Offers = () => {
     }
   };
 
-  let data = products.map((item) => (
+  let data = currentProducts.map((item) => (
     <Card
       key={item.id}
       title={item.data.name}
@@ -121,14 +128,34 @@ const Offers = () => {
               </div>
             ) : url ? (
               filterData.length != 0 ? (
-                <div className='offers__cards'>{filterData}</div>
+                <>
+                  <div className='offers__cards'>{filterData}</div>
+                  {filterData.length > 8 && (
+                    <CustomPagination
+                      currentPage={currentPage}
+                      setCurrentPage={setCurrentPage}
+                      perPage={perPage}
+                      count={products.length}
+                    />
+                  )}
+                </>
               ) : (
                 <div style={{ textAlign: 'center', fontSize: 24, fontWeight: 700, marginTop: 100 }}>
                   Ничего не найдено!
                 </div>
               )
             ) : data.length != 0 ? (
-              <div className='offers__cards'>{data}</div>
+              <>
+                <div className='offers__cards'>{data}</div>
+                {products.length > 8 && (
+                  <CustomPagination
+                    currentPage={currentPage}
+                    setCurrentPage={setCurrentPage}
+                    perPage={perPage}
+                    count={products.length}
+                  />
+                )}
+              </>
             ) : (
               <div style={{ textAlign: 'center', fontSize: 24, fontWeight: 700, marginTop: 100 }}>
                 Ничего не найдено!

@@ -4,17 +4,21 @@ import { Container } from 'react-bootstrap';
 import Search from '../../components/Search';
 import Layout from '../../layout/Layout';
 import AdminProductCart from '../../components/AdminProducCard';
-import axios from 'axios';
 import AdminCreateProduct from '../../components/AdminCreateProduct';
 import { useNavigate } from 'react-router-dom';
 import CustomPagination from '../../components/Pagination';
-import { useSelector } from 'react-redux';
 
 const Admin = () => {
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const [rerender, setRerender] = useState(false);
   const [value, setValue] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const perPage = 8;
+  const lastProductIndex = currentPage * perPage;
+  const fisrtProductIndex = lastProductIndex - perPage;
+  const currentProducts =
+    products !== null ? products.slice(fisrtProductIndex, lastProductIndex) : 0;
 
   const deleteProduct = async (id) => {
     const response = await productsApi.deleteProducts(id);
@@ -25,6 +29,7 @@ const Admin = () => {
 
   const getProducts = async () => {
     const data = await productsApi.getProducts();
+
     setProducts(data);
   };
 
@@ -46,13 +51,14 @@ const Admin = () => {
     getProducts();
   }, [rerender]);
 
+  useEffect(() => {}, [currentPage]);
   return (
     <Layout>
       <Container>
         <div className='admin'>
           <div className='admin__products'>
             <div className='products__header'>
-              <h5>Товары: 100</h5>
+              <h5>Товары: {products.length}</h5>
               <div className='products__search'>
                 <Search
                   placeholder={'Поиск'}
@@ -64,8 +70,8 @@ const Admin = () => {
               </div>
             </div>
             <div className='products__carts'>
-              {products.length != 0 ? (
-                products.map((product) => (
+              {products !== null ? (
+                currentProducts.map((product) => (
                   <AdminProductCart
                     key={product.id}
                     id={product.id}
@@ -79,7 +85,14 @@ const Admin = () => {
                 </p>
               )}
             </div>
-            <CustomPagination />
+            {products !== null && products.length > 8 && (
+              <CustomPagination
+                count={products.length}
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+                perPage={perPage}
+              />
+            )}
           </div>
           <AdminCreateProduct rerender={rerender} setRerender={setRerender} mobile={false} />
           <div className='products__add' onClick={pushToAddProduct}>

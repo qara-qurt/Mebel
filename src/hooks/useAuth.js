@@ -2,16 +2,16 @@ import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 
 const useAuth = () => {
-    const {isAuth,user,money} = useSelector((state)=>state.auth)
+    const {isAuth,user,role} = useSelector((state)=>state.auth)
     const [auth,setAuth] = useState();
     const [email,setEmail] = useState();
-    const [cash,setCash] = useState();
+    const [roles,setRoles] = useState();
     useEffect(()=>{
         setAuth(isAuth)
         setEmail(user)
-        setCash(money)
+        setRoles(role)
     },[isAuth,user])
-    return  {"isAuth":auth,"email":email,"money":cash}
+    return  {"isAuth":auth,"email":email,"role":roles}
 }
 
 export default useAuth

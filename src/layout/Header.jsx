@@ -17,7 +17,7 @@ export const Header = () => {
   const { count } = useSelector((state) => state.cart);
   const { likesCount } = useSelector((state) => state.like);
   const dispatch = useDispatch();
-  const { isAuth, email, money } = useAuth();
+  const { isAuth, email, money, role } = useAuth();
   const navigate = useNavigate();
   const [search, setSearch] = useState('');
   const [show, setShow] = useState(false);
@@ -34,6 +34,8 @@ export const Header = () => {
     e.preventDefault();
     navigate(`/offers/?search=${search}`);
   };
+
+  const addMoney = () => {};
 
   return (
     <>
@@ -91,10 +93,11 @@ export const Header = () => {
                   {isAuth ? (
                     <>
                       <Dropdown.ItemText>{email}</Dropdown.ItemText>
-                      <Dropdown.ItemText>Money: {money} тг</Dropdown.ItemText>
-                      <NavDropdown.Item>
-                        <div onClick={() => navigate('/admin')}>Панель админа</div>
-                      </NavDropdown.Item>
+                      {role === 'ADMIN' && (
+                        <NavDropdown.Item>
+                          <div onClick={() => navigate('/admin')}>Панель админа</div>
+                        </NavDropdown.Item>
+                      )}
                       <NavDropdown.Item>
                         <div onClick={handleShow}>Выйти</div>
                       </NavDropdown.Item>

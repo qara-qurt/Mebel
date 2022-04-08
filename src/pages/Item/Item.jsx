@@ -1,7 +1,6 @@
 import { Col, Row } from 'react-bootstrap';
 import { Button } from '../../components/Button';
 import like from '../../assets/img/heart.png';
-import { useState } from 'react';
 
 const Item = ({ currentProduct, onSetToCart, onSetToLike }) => {
   return (
@@ -24,8 +23,9 @@ const Item = ({ currentProduct, onSetToCart, onSetToLike }) => {
       </Col>
       <Col md={5} className='item__info'>
         <div className='item__title'>
-          <h4>{currentProduct.name} -</h4>
-          <h4> - {currentProduct.price} Тг</h4>
+          <h4>{currentProduct.name}</h4>
+          <pre> </pre>
+          <h4>{currentProduct.price} Тг</h4>
         </div>
         <div className='item__more-info'>
           <p>{currentProduct.description}</p>

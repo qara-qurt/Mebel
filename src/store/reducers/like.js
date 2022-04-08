@@ -14,7 +14,7 @@ export const fetchAddLike = createAsyncThunk(
     async (data, { rejectWithValue }) => {
       const url = `https://mebel-f0c71-default-rtdb.europe-west1.firebasedatabase.app/products/${data.id}.json`
       try {
-          const productResponse = await axios.get(url)
+        const productResponse = await axios.get(url)
           const response = await axios.put(url,{...productResponse.data,views:productResponse.data.views+1})
           if(response.status =='200'){
              return data
@@ -60,6 +60,6 @@ export const likeSlice = createSlice({
   }
 })
 
-export const { addLike,deleteLike } = likeSlice.actions
+export const { deleteLike } = likeSlice.actions
 
 export default likeSlice.reducer

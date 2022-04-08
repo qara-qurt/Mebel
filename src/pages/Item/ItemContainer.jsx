@@ -5,9 +5,8 @@ import { useDispatch } from 'react-redux';
 import { setCart } from '../../store/reducers/cart';
 import Item from './Item';
 import Layout from '../../layout/Layout';
-import axios from 'axios';
 import { useAlert } from 'react-alert';
-import { addLike } from '../../store/reducers/like';
+import { fetchAddLike } from '../../store/reducers/like';
 import { productsApi } from '../../api/api';
 
 const ItemContainer = ({}) => {
@@ -18,7 +17,7 @@ const ItemContainer = ({}) => {
 
   const onSetToCart = () => {
     const data = {
-      id: currentProduct.id,
+      id: productId,
       title: currentProduct.name,
       description: currentProduct.description,
       price: currentProduct.price,
@@ -30,14 +29,14 @@ const ItemContainer = ({}) => {
 
   const onSetToLike = () => {
     const data = {
-      id: currentProduct.id,
+      id: productId,
       title: currentProduct.name,
       description: currentProduct.description,
       price: currentProduct.price,
       img: currentProduct.photos[0].photoUrl,
     };
     alert.show('Добавлено в избранные!');
-    dispatch(addLike(data));
+    dispatch(fetchAddLike(data));
   };
 
   useEffect(async () => {

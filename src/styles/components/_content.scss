@@ -26,6 +26,7 @@
         display: flex;
         flex-wrap: wrap;
         a{
+            border: 0.2px solid $gray;
             font-weight: 500;
             color: $black;
             text-decoration: none;
@@ -35,24 +36,30 @@
             margin: 0px 15px;
             margin-top: 10px;
         }
+        .active{
+            border-color:$dark-gray;
+        }
     }
     &__photos{
         margin: 55px 0px;
-        display: grid;
-        gap:10px;
-        grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
-        position: relative;
-        img{
-            width: 100%;
-            height: 100%;
-        }
-        .big-photos{
+        display: grid; 
+        grid-auto-flow: row dense; 
+        grid-auto-rows: 1fr;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        gap: 20px;
+        .grid-item{
+            cursor: pointer;
             grid-column: span 2;
-            grid-row: span 2;
+            grid-row: span 4;
+            img{
+                object-fit: cover;
+                width: 100%;
+                height: 100%;
+            }
         }
-        .middle-photos{
+        .img-center{
             grid-column: span 2;
-            grid-row: 1/span 1;
+            grid-row: span 3;
         }
     }
 }

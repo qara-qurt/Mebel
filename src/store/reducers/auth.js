@@ -4,9 +4,9 @@ import axios from 'axios'
 const initialState = {
   isAuth:false,
   user: null,
-  money:null,
   loading: false,
-  status:null
+  status: null,
+  role:null
 }
 
 export const fetchLogin = createAsyncThunk(
@@ -18,16 +18,16 @@ export const fetchLogin = createAsyncThunk(
            const response = await axios.post(url,{email:email,password:password,returnSecureToken:true})
            if(response.status =='200'){
             localStorage.setItem('UserId',response.data.localId)
-            let money
+            let role
             const userResponse = await axios.get(databaseUrl)
             const keys = Object.keys(userResponse.data)
             keys.forEach(el=>{
                 if(userResponse.data[el]['id']==localStorage.getItem('UserId')){
                     localStorage.setItem('AuthId',el)
-                    money = userResponse.data[el]['money']
+                  role = userResponse.data[el]['role']
                 } 
             })
-              return {...response.data,money:money}
+              return {...response.data,role:role}
            }
         }catch(error){
             return rejectWithValue(error.messages)
@@ -37,13 +37,13 @@ export const fetchLogin = createAsyncThunk(
 
 export const fetchRegister = createAsyncThunk(
   'auht/fetchRegister',
-  async ({email,password},{rejectWithValue}) => {
+  async ({email,password,role="USER"},{rejectWithValue}) => {
       const url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBrrpXXSliTe7Zbq1cwnoBib0lG0ck4nfE'
       const databaseUrl = 'https://mebel-f0c71-default-rtdb.europe-west1.firebasedatabase.app/users.json'
       try{
          const response = await axios.post(url,{email:email,password:password,returnSecureToken:true})
          if(response.status == '200'){
-             const userResponse = await axios.post(databaseUrl,{id:response.data.localId, email:email,money:0})
+             await axios.post(databaseUrl,{id:response.data.localId, email:email,role:role})
              return response.data
          }
       }catch(error){
@@ -57,7 +57,6 @@ export const fetchSendForgotPasswordToEmail = createAsyncThunk(
   async ({email},{rejectWithValue}) => {
       const url = 'https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyBrrpXXSliTe7Zbq1cwnoBib0lG0ck4nfE'
       try{
-        console.log(email);
          const response = await axios.post(url,{requestType:"PASSWORD_RESET",email:email})
          if(response.status =='200'){
              return response.data
@@ -78,23 +77,24 @@ export const authSlice = createSlice({
         state.loading = false
         state.user = null
         state.status = null
+        state.role = ""
         localStorage.removeItem('Token')
         localStorage.removeItem('UserId')
         localStorage.removeItem('Email')
-        localStorage.removeItem('Money')
         localStorage.removeItem('AuthId')
+        localStorage.removeItem('Role')
     },
     autoLogin: (state) => {
         const token = localStorage.getItem('Token')
         const userId = localStorage.getItem('UserId')
+        const role = localStorage.getItem('Role')
         const email = localStorage.getItem('Email')
-        const money = localStorage.getItem('Money')
-        if(token!=null && userId!=null && email!=null && money!=null){
+        if(token!=null && userId!=null && email!=null){
             state.loading = false
             state.user = email
-            state.money = money
             state.isAuth = true
             state.status = '200'
+            state.role = role
         }
     },
   },
@@ -103,15 +103,15 @@ export const authSlice = createSlice({
       [fetchLogin.pending]:(state)=>{
         state.loading = true
       },
-      [fetchLogin.fulfilled]:(state,action)=>{
+    [fetchLogin.fulfilled]: (state, action) => {
         state.loading = false
         state.user = action.payload.email
         state.isAuth = true
         state.status = '200'
-        state.money = action.payload.money
-        localStorage.setItem('Token',action.payload.idToken)
+        state.role = action.payload.role
+        localStorage.setItem('Token', action.payload.idToken)
+        localStorage.setItem('Role',action.payload.role)
         localStorage.setItem('Email', action.payload.email)
-        localStorage.setItem('Money', action.payload.money)
       },
       [fetchLogin.rejected]:(state)=>{
         state.loading = false
