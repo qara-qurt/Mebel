@@ -14,12 +14,12 @@ const Payment = ({ onClose, active }) => {
           <div
             className={activeIdx == 0 ? 'select active' : 'select'}
             onClick={() => setActiveIdx(0)}>
-            Наличной
+            Картой
           </div>
           <div
             className={activeIdx == 1 ? 'select active' : 'select'}
             onClick={() => setActiveIdx(1)}>
-            Картой
+            Наличной
           </div>
         </div>
         {activeIdx == 0 ? (
