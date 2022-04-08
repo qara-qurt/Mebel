@@ -12,7 +12,7 @@ export const options = {
   }
 
   export const AlertTemplate = ({message}) => (
-    <div style={{ zIndex:50 ,backgroundColor:"#24a319",color:'#fff'}}>
+    <div style={{ zIndex:5000 ,backgroundColor:"#24a319",color:'#fff'}}>
       <div style={{ padding:'10px',fontSize:14 }}>{message}</div>
     </div>
   )

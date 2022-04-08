@@ -11,7 +11,7 @@ const initialState = localStorage.getItem("likes") == null ? {
 
 export const fetchAddLike = createAsyncThunk(
     'like/fetchAddLike',
-    async (data, { rejectWithValue }) => {
+  async (data, { rejectWithValue }) => {
       const url = `https://mebel-f0c71-default-rtdb.europe-west1.firebasedatabase.app/products/${data.id}.json`
       try {
         const productResponse = await axios.get(url)
