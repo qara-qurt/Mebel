@@ -8,11 +8,12 @@ export const options = {
     timeout: 5000,
     offset: '200px',
     transition: transitions.SCALE,
+    zIndex:100,
     containerStyle: {}
   }
 
   export const AlertTemplate = ({message}) => (
-    <div style={{ zIndex:5000 ,backgroundColor:"#24a319",color:'#fff'}}>
+    <div style={{backgroundColor:"#24a319",color:'#fff'}}>
       <div style={{ padding:'10px',fontSize:14 }}>{message}</div>
     </div>
   )

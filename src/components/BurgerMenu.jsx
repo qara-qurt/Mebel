@@ -144,7 +144,6 @@ export const BurgerMenu = () => {
           {isAuth ? (
             <>
               <Nav.Link>Имя:{email}</Nav.Link>
-              <Nav.Link>На счету: {money} тг</Nav.Link>
               <Nav.Link
                 onClick={() => {
                   navigate('/admin');

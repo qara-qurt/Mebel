@@ -84,6 +84,7 @@ input{
 .pop-card{
     display: flex;
     justify-content: center;
+    z-index: 1;
     &__item{
         width: 377px;
         height: 500px;
@@ -137,3 +138,6 @@ input{
     }
 }
 
+.swiper{
+    z-index: 0!important;
+}

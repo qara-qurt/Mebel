@@ -39,7 +39,7 @@ const Cart = ({ cart, allPrice, onDeleCartItem, onPlusCart, onMinusCart }) => {
           <div className='all-price'>
             <h5 className='all-price__title'>Сумма заказа</h5>
             <div className='all-price__price'>
-              <h5>Общая суммка заказа:</h5>
+              <h5>Общая сумма заказа:</h5>
               <h5>{allPrice}</h5>
             </div>
             <div className='all-price__button' onClick={onBuy}>
