@@ -7,6 +7,7 @@ import AdminProductCart from '../../components/AdminProducCard';
 import AdminCreateProduct from '../../components/AdminCreateProduct';
 import { useNavigate } from 'react-router-dom';
 import CustomPagination from '../../components/Pagination';
+import useAuth from '../../hooks/useAuth';
 
 const Admin = () => {
   const navigate = useNavigate();
@@ -52,13 +53,14 @@ const Admin = () => {
   }, [rerender]);
 
   useEffect(() => {}, [currentPage]);
+
   return (
     <Layout>
       <Container>
         <div className='admin'>
           <div className='admin__products'>
             <div className='products__header'>
-              <h5>Товары: {products.length}</h5>
+              <h5>Товары: {products !== null ? products.length : 0}</h5>
               <div className='products__search'>
                 <Search
                   placeholder={'Поиск'}
