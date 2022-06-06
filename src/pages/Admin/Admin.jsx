@@ -7,7 +7,6 @@ import AdminProductCart from '../../components/AdminProducCard';
 import AdminCreateProduct from '../../components/AdminCreateProduct';
 import { useNavigate } from 'react-router-dom';
 import CustomPagination from '../../components/Pagination';
-import useAuth from '../../hooks/useAuth';
 
 const Admin = () => {
   const navigate = useNavigate();

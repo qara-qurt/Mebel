@@ -2,12 +2,14 @@ import { useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import CardBasket from '../../components/CardBasket';
+import Delivery from '../../components/Delivery';
 import Payment from '../../components/Payment';
 import useAuth from '../../hooks/useAuth';
 
 const Cart = ({ cart, allPrice, onDeleCartItem, onPlusCart, onMinusCart }) => {
   const { isAuth } = useAuth();
   const [isShowModal, setIsShowModal] = useState(false);
+  const [isShowModal2, setIsShowModal2] = useState(false);
   const onBuy = () => {
     if (isAuth) {
       setIsShowModal(!isShowModal);
@@ -16,8 +18,13 @@ const Cart = ({ cart, allPrice, onDeleCartItem, onPlusCart, onMinusCart }) => {
     }
   };
   const onClose = () => {
-    setIsShowModal(!isShowModal);
+    setIsShowModal(false)
+    setIsShowModal2(false);
   };
+  const next = () =>{
+    setIsShowModal(!isShowModal)
+    setIsShowModal2(!isShowModal2)
+  }
   return (
     <>
       <Row>
@@ -48,7 +55,8 @@ const Cart = ({ cart, allPrice, onDeleCartItem, onPlusCart, onMinusCart }) => {
           </div>
         </Col>
       </Row>
-      <Payment onClose={onClose} active={isShowModal} />
+      <Payment onClose={onClose} active={isShowModal2} />
+      <Delivery next={next} active={isShowModal}/>
     </>
   );
 };

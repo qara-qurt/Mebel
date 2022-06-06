@@ -10,9 +10,10 @@ import { logOut } from '../store/reducers/auth';
 export const BurgerMenu = () => {
   const [isVisible, setIsVisible] = useState(false);
   const navigate = useNavigate();
-  const { isAuth, email, money } = useAuth();
+  const { isAuth, email,role } = useAuth();
   const [show, setShow] = useState(false);
   const dispatch = useDispatch();
+
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -144,13 +145,14 @@ export const BurgerMenu = () => {
           {isAuth ? (
             <>
               <Nav.Link>Имя:{email}</Nav.Link>
-              <Nav.Link
+              {role=="ADMIN"&&<Nav.Link
                 onClick={() => {
                   navigate('/admin');
                   onSetVisible();
                 }}>
                 Панель админа
               </Nav.Link>
+              }
               <Nav.Link onClick={handleShow}>Выйти</Nav.Link>
             </>
           ) : (
