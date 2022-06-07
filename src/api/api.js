@@ -70,7 +70,7 @@ export const productsApi = {
     async searchProduct(search) {
         const url = 'https://mebel-f0c71-default-rtdb.europe-west1.firebasedatabase.app/products.json';
         try {
-            const response = await axios.get(url)
+            const response = await axios.post(url)
             if (response.status == '200') {
                 return Object.keys(response.data)
                     .map((product) => ({
@@ -87,5 +87,61 @@ export const productsApi = {
         } catch (error) {
             throw Error(error);
         }
+    },
+
+    async addProductToDelivery(data){
+        const url = 'https://mebel-f0c71-default-rtdb.europe-west1.firebasedatabase.app/delivery.json';
+        try{
+            data.products.forEach(async(val)=>{
+                const newData = {
+                    product:val,
+                    user_id:data.user_id,
+                    user:data.user,
+                    isPayed:data.isPayed,
+                    phone:data.phone,
+                    status:"На складе",
+                    address:data.address,
+                  }
+                await axios.post(url,newData)
+            })
+            
+         }catch(error){
+            throw Error(error);
+         }
+    },
+    async getProductsFromDelivery(){
+        const url = 'https://mebel-f0c71-default-rtdb.europe-west1.firebasedatabase.app/delivery.json';
+        try{
+            const response = await axios.get(url)
+            if(response.status == '200'){
+                return response.data
+            }
+         }catch(error){
+            throw Error(error);
+         }
+    },
+
+    async deleteProductsFromDelivery(id){
+        const url = `https://mebel-f0c71-default-rtdb.europe-west1.firebasedatabase.app/delivery/${id}.json`;
+        try{
+            const response = await axios.delete(url)
+            if(response.status == '200'){
+                return response.data
+            }
+         }catch(error){
+            throw Error(error);
+         }
+    },
+
+    async updateProductsFromDelivery(data,id){
+        const url = `https://mebel-f0c71-default-rtdb.europe-west1.firebasedatabase.app/delivery/${id}.json`;
+        try{
+            const response = await axios.put(url,data)
+            if(response.status == '200'){
+                return response.data
+            }
+         }catch(error){
+            throw Error(error);
+         }
     }
 }

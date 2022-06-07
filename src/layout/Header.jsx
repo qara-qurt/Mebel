@@ -93,11 +93,18 @@ export const Header = () => {
                   {isAuth ? (
                     <>
                       <Dropdown.ItemText>{email}</Dropdown.ItemText>
-                      {role === 'ADMIN' && (
+                      {role === 'ADMIN' ? (
+                        <>
                         <NavDropdown.Item>
                           <div onClick={() => navigate('/admin')}>Панель админа</div>
                         </NavDropdown.Item>
-                      )}
+                        <NavDropdown.Item>
+                        <div onClick={() => navigate('/admin-orders')}>Заказы</div>
+                        </NavDropdown.Item>
+                        </>
+                      ): <NavDropdown.Item>
+                          <div onClick={() => navigate('/orders')}>Мои заказы</div>
+                        </NavDropdown.Item>}
                       <NavDropdown.Item>
                         <div onClick={handleShow}>Выйти</div>
                       </NavDropdown.Item>

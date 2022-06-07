@@ -145,12 +145,26 @@ export const BurgerMenu = () => {
           {isAuth ? (
             <>
               <Nav.Link>Имя:{email}</Nav.Link>
-              {role=="ADMIN"&&<Nav.Link
+              {role=="ADMIN"?
+              <>
+              <Nav.Link
                 onClick={() => {
                   navigate('/admin');
                   onSetVisible();
                 }}>
                 Панель админа
+              </Nav.Link>
+              <Nav.Link onClick={() => {
+                navigate('/admin-orders')
+                onSetVisible();
+              }}>
+                Заказы
+              </Nav.Link>
+              </>:<Nav.Link onClick={() => {
+                navigate('/orders')
+                onSetVisible();
+              }}>
+                Мои заказы
               </Nav.Link>
               }
               <Nav.Link onClick={handleShow}>Выйти</Nav.Link>

@@ -16,6 +16,8 @@ import SendMessageToEmail from './pages/ResetPassword/SendMessageToEmail';
 import AdminCreateProduct from './components/AdminCreateProduct';
 import Likes from './pages/Likes/Likes';
 import Offers from './pages/Offers/Offers';
+import Orders from './pages/Orders/Orders';
+import AdminOrders from './pages/AdminOrders/AdminOrders';
 
 function App() {
   const { isAuth, role } = useAuth();
@@ -47,6 +49,7 @@ function App() {
     <Route path='/login' element={<Login />} />,
     <Route path='/register' element={<Register />} />,
     <Route path='/forgotPassword' element={<SendMessageToEmail />} />,
+    <Route path='/admin-orders' element={<AdminOrders />} />,
     <Route path='*' element={<Error />} />,
   ];
 
@@ -70,12 +73,13 @@ function App() {
     <Route path='/login' element={<Login />} />,
     <Route path='/register' element={<Register />} />,
     <Route path='/forgotPassword' element={<SendMessageToEmail />} />,
+    <Route path='/orders' element={<Orders />} />,
     <Route path='*' element={<Error />} />,
   ];
 
   return (
     <>
-      <Routes>{role == 'ADMIN' ? adminRoutes : defaultRoutes}</Routes>
+      <Routes>{role === 'ADMIN' ? adminRoutes : defaultRoutes}</Routes>
     </>
   );
 }
