@@ -126,12 +126,12 @@ const AdminCreateProduct = ({ rerender, setRerender, mobile }) => {
           <img src={backblack} className='admin__goBack' alt='Вернуться назад' onClick={goBack} />
         )}
         <div className='create'>
-          <h5>Добаваить товар</h5>
+          <h5>Добавить товар</h5>
           <div className='create__inputs'>
             <Input
               name='name'
               type='text'
-              placeholder='Назваение'
+              placeholder='Название'
               value={name}
               setValue={nameHandler}
             />
